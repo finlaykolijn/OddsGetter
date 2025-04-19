@@ -1,5 +1,6 @@
 import { chromium, Page } from 'playwright';
 
+//Launch browser
 async function scrapeOddsPortal() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -13,8 +14,10 @@ async function scrapeOddsPortal() {
   console.log('Waiting for event rows to load...');
   await page.waitForSelector('.eventRow', { timeout: 10000 });
 
+  //Get all the matches
   const matches = await page.$$eval('.eventRow', (rows: Element[]) =>
     rows.map(row => {
+      //Scrape the teams and odds
       const teams = Array.from(row.querySelectorAll('.participant-name'))
         .map(el => el.textContent?.trim() || '')
         .filter(Boolean);
@@ -22,6 +25,8 @@ async function scrapeOddsPortal() {
         .map(el => el.textContent?.trim() || '')
         .slice(0, 3);
 
+      //Get the event ID and slug
+      //The slug is the part of the URL that identifies the match
       const eventId = row.getAttribute('id');
       const href = row.querySelector('a[href*="premier-league"]')?.getAttribute('href') || '';
       const slugMatch = href.match(/\/premier-league\/(.+?)\//);
@@ -44,7 +49,7 @@ async function scrapeOddsPortal() {
   console.log(`Found ${matches.length} matches.`);
 
 
-
+  //Go through each match
   for (const match of matches as (typeof matches[0] & { bet365?: { win: string | null; draw: string | null; lose: string | null } })[]) {
     const matchPage = await browser.newPage();
     const url = `https://www.oddsportal.com/football/england/premier-league/${match.slug}/#1X2;2;`;
@@ -74,6 +79,7 @@ async function scrapeOddsPortal() {
   console.log('\nDone scraping all matches!');
 }
 
+  //Scrape the odds for each match from bet365
 async function getBet365OddsWithRetry(page: Page): Promise<{ win: string | null; draw: string | null; lose: string | null }> {
   const attempt = async (): Promise<string[]> => {
     await page.waitForSelector('div.border-black-borders', { timeout: 7000 });
