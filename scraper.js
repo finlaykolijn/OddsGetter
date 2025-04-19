@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_1 = require("playwright");
+//Launch browser
 function scrapeOddsPortal() {
     return __awaiter(this, void 0, void 0, function* () {
         const browser = yield playwright_1.chromium.launch({ headless: true });
@@ -21,14 +22,18 @@ function scrapeOddsPortal() {
         });
         console.log('Waiting for event rows to load...');
         yield page.waitForSelector('.eventRow', { timeout: 10000 });
+        //Get all the matches
         const matches = yield page.$$eval('.eventRow', (rows) => rows.map(row => {
             var _a;
+            //Scrape the teams and odds
             const teams = Array.from(row.querySelectorAll('.participant-name'))
                 .map(el => { var _a; return ((_a = el.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || ''; })
                 .filter(Boolean);
             const odds = Array.from(row.querySelectorAll('p.height-content'))
                 .map(el => { var _a; return ((_a = el.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || ''; })
                 .slice(0, 3);
+            //Get the event ID and slug
+            //The slug is the part of the URL that identifies the match
             const eventId = row.getAttribute('id');
             const href = ((_a = row.querySelector('a[href*="premier-league"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('href')) || '';
             const slugMatch = href.match(/\/premier-league\/(.+?)\//);
@@ -46,6 +51,7 @@ function scrapeOddsPortal() {
             };
         }).filter(m => m.team1 && m.team2 && m.slug && m.eventId));
         console.log(`Found ${matches.length} matches.`);
+        //Go through each match
         for (const match of matches) {
             const matchPage = yield browser.newPage();
             const url = `https://www.oddsportal.com/football/england/premier-league/${match.slug}/#1X2;2;`;
@@ -70,6 +76,7 @@ function scrapeOddsPortal() {
         console.log('\nDone scraping all matches!');
     });
 }
+//Scrape the odds for each match from bet365
 function getBet365OddsWithRetry(page) {
     return __awaiter(this, void 0, void 0, function* () {
         const attempt = () => __awaiter(this, void 0, void 0, function* () {

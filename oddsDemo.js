@@ -44,22 +44,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const oddsApi_1 = require("./oddsApi");
 const fs = __importStar(require("fs"));
-// You would replace this with your actual API key
+//Env variable is set up
 const API_KEY = process.env.ODDS_API_KEY || 'YOUR_API_KEY';
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const client = new oddsApi_1.OddsApiClient(API_KEY);
         try {
-            // First, let's get all available sports
+            //Get all available sports
             console.log('Fetching available sports...');
             const sports = yield client.getSports();
-            // Find Premier League in the sports list
+            //Get Premier League in the sports list, key is soccer_epl
             const premierLeague = sports.find(sport => sport.key === 'soccer_epl');
             console.log('Premier League info:', premierLeague);
-            // Get Premier League odds
+            //Get Premier League odds
             console.log('\nFetching Premier League odds for FanDuel and DraftKings...');
             const plOdds = yield client.getPremierLeagueOdds();
-            // Display the odds
+            //Display the odds for FanDuel and DraftKings (Could add whichever bookmaker I want in oddsApi.ts)
             console.log(`\nFound ${plOdds.length} Premier League games with odds:`);
             plOdds.forEach(game => {
                 console.log(`\n${game.home_team} vs ${game.away_team} (${new Date(game.commence_time).toLocaleString()})`);
@@ -74,7 +74,7 @@ function main() {
                     });
                 });
             });
-            // Save the data to a JSON file
+            //Save the data to a JSON file
             fs.writeFileSync('premier_league_odds.json', JSON.stringify(plOdds, null, 2));
             console.log('\nSaved odds data to premier_league_odds.json');
         }

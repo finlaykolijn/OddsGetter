@@ -18,9 +18,7 @@ class OddsApiClient {
     constructor(apiKey) {
         this.apiKey = apiKey;
     }
-    /**
-     * Get a list of available sports
-     */
+    //Gets list of all available sports
     getSports() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -38,9 +36,8 @@ class OddsApiClient {
         });
     }
     /**
-     * Get odds for a specific sport
-     * @param sportKey - The sport key (e.g., 'soccer_epl' for Premier League)
-     * @param options - Options for the API request
+     * @param sportKey The sport key
+     * @param options Options for the API request
      */
     getOdds(sportKey_1) {
         return __awaiter(this, arguments, void 0, function* (sportKey, options = {}) {
@@ -66,14 +63,12 @@ class OddsApiClient {
             }
         });
     }
-    /**
-     * Get Premier League odds specifically for FanDuel and DraftKings
-     */
+    //Get Premier League odds specifically for FanDuel and DraftKings
     getPremierLeagueOdds() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.getOdds('soccer_epl', {
                 regions: 'us',
-                markets: 'h2h', // Win/Draw/Lose odds
+                markets: 'h2h', // ML odds, can edit this to get other markets
                 bookmakers: 'fanduel,draftkings'
             });
         });
@@ -89,6 +84,3 @@ class OddsApiClient {
     }
 }
 exports.OddsApiClient = OddsApiClient;
-// Example usage:
-// const client = new OddsApiClient('YOUR_API_KEY');
-// client.getPremierLeagueOdds().then(data => console.log(data)); 

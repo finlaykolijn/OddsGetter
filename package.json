@@ -9,7 +9,8 @@
   },
   "scripts": {
     "scrape": "tsc && node scraper.js",
-    "odds": "tsc && node oddsDemo.js"
+    "odds": "tsc && node oddsDemo.js",
+    "check-bookmakers": "tsc && node checkBookmakers.js"
   }
 
 }
