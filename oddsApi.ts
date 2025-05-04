@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Types for API responses
-interface Sport {
+export interface Sport {
   key: string;
   group: string;
   title: string;
@@ -10,24 +10,24 @@ interface Sport {
   has_outrights: boolean;
 }
 
-interface Bookmaker {
+export interface Bookmaker {
   key: string;
   title: string;
   last_update: string;
   markets: Market[];
 }
 
-interface Market {
+export interface Market {
   key: string;
   outcomes: Outcome[];
 }
 
-interface Outcome {
+export interface Outcome {
   name: string;
   price: number;
 }
 
-interface Game {
+export interface Game {
   id: string;
   sport_key: string;
   sport_title: string;
