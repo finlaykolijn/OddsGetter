@@ -50,15 +50,15 @@ async function main() {
         console.log('\nSaved odds data to premier_league_odds.json');
 
         // Test query
-        const teamName = 'Liverpool';
-        console.log(`\nQuerying odds for ${teamName}...`);
-        const liverpoolOdds = await oddsService.getTeamOdds(teamName);
-        console.log(`Found ${liverpoolOdds.length} odds entries for ${teamName}`);
+        // const teamName = 'Liverpool';
+        // console.log(`\nQuerying odds for ${teamName}...`);
+        // const liverpoolOdds = await oddsService.getTeamOdds(teamName);
+        // console.log(`Found ${liverpoolOdds.length} odds entries for ${teamName}`);
         
-        if (liverpoolOdds.length > 0) {
-            console.log('\nSample odds data from database:');
-            console.log(JSON.stringify(liverpoolOdds[0], null, 2));
-        }
+        // if (liverpoolOdds.length > 0) {
+        //     console.log('\nSample odds data from database:');
+        //     console.log(JSON.stringify(liverpoolOdds[0], null, 2));
+        // }
 
     } catch (error) {
         console.error('Error:', error);

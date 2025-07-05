@@ -44,6 +44,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const oddsApi_1 = require("./oddsApi");
 const fs = __importStar(require("fs"));
+const dotenv = __importStar(require("dotenv"));
+// Load environment variables from .env file
+dotenv.config();
 const API_KEY = process.env.ODDS_API_KEY || 'YOUR_API_KEY';
 function checkBookmakers() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -62,7 +65,14 @@ function checkBookmakers() {
             const targetLeagues = [
                 { name: 'Premier League', possibleKeys: ['soccer_epl', 'soccer_england_premier_league'] },
                 { name: 'UEFA Champions League', possibleKeys: ['soccer_uefa_champs_league', 'soccer_champions_league'] },
-                { name: 'Bundesliga', possibleKeys: ['soccer_germany_bundesliga', 'soccer_bundesliga'] }
+                { name: 'UEFA Europa League', possibleKeys: ['soccer_uefa_europa_league', 'soccer_europa_league'] },
+                //{ name: 'UEFA Europa Conference League', possibleKeys: ['soccer_uefa_europa_conf_league', 'soccer_europa_conf_league'] },
+                //{ name: 'Bundesliga', possibleKeys: ['soccer_germany_bundesliga', 'soccer_bundesliga'] },
+                //{ name: 'La Liga', possibleKeys: ['soccer_spain_la_liga', 'soccer_la_liga'] },
+                //{ name: 'Serie A', possibleKeys: ['soccer_italy_serie_a', 'soccer_serie_a'] },
+                //{ name: 'Ligue 1', possibleKeys: ['soccer_france_ligue_1', 'soccer_ligue_1'] },
+                //{ name: 'Eredivisie', possibleKeys: ['soccer_netherlands_eredivisie', 'soccer_eredivisie'] },
+                //{ name: 'MLS', possibleKeys: ['soccer_usa_mls', 'soccer_mls'] }
             ];
             //Find matches for target leagues from the sports list
             const leaguesToCheck = [];
