@@ -10,11 +10,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Bournemouth",
@@ -35,11 +35,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Bournemouth",
@@ -70,11 +70,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Aston Villa",
@@ -95,11 +95,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Aston Villa",
@@ -120,66 +120,6 @@
     ]
   },
   {
-    "id": "d53b160e9388a3b4ea577ff665753df0",
-    "sport_key": "soccer_epl",
-    "sport_title": "EPL",
-    "commence_time": "2025-08-16T14:00:00Z",
-    "home_team": "Nottingham Forest",
-    "away_team": "Brentford",
-    "bookmakers": [
-      {
-        "key": "draftkings",
-        "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
-        "markets": [
-          {
-            "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
-            "outcomes": [
-              {
-                "name": "Brentford",
-                "price": 3.1
-              },
-              {
-                "name": "Nottingham Forest",
-                "price": 2.2
-              },
-              {
-                "name": "Draw",
-                "price": 3.5
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "key": "fanduel",
-        "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
-        "markets": [
-          {
-            "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
-            "outcomes": [
-              {
-                "name": "Brentford",
-                "price": 3.3
-              },
-              {
-                "name": "Nottingham Forest",
-                "price": 2.15
-              },
-              {
-                "name": "Draw",
-                "price": 3.5
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "ad4a48da31810362af7fe32298725571",
     "sport_key": "soccer_epl",
     "sport_title": "EPL",
@@ -190,11 +130,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Brighton and Hove Albion",
@@ -215,11 +155,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Brighton and Hove Albion",
@@ -250,11 +190,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Burnley",
@@ -275,23 +215,23 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Burnley",
-                "price": 8.5
+                "price": 7.5
               },
               {
                 "name": "Tottenham Hotspur",
-                "price": 1.34
+                "price": 1.37
               },
               {
                 "name": "Draw",
-                "price": 5.1
+                "price": 4.9
               }
             ]
           }
@@ -310,11 +250,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Sunderland",
@@ -335,11 +275,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:58Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Sunderland",
@@ -370,11 +310,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Manchester City",
@@ -382,11 +322,11 @@
               },
               {
                 "name": "Wolverhampton Wanderers",
-                "price": 5.75
+                "price": 6
               },
               {
                 "name": "Draw",
-                "price": 4.7
+                "price": 4.6
               }
             ]
           }
@@ -395,11 +335,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Manchester City",
@@ -420,6 +360,41 @@
     ]
   },
   {
+    "id": "eb357add4cbd1823e64186800ab46b13",
+    "sport_key": "soccer_epl",
+    "sport_title": "EPL",
+    "commence_time": "2025-08-17T13:00:00Z",
+    "home_team": "Nottingham Forest",
+    "away_team": "Brentford",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-05T21:11:33Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-05T21:11:33Z",
+            "outcomes": [
+              {
+                "name": "Brentford",
+                "price": 3.3
+              },
+              {
+                "name": "Nottingham Forest",
+                "price": 2.15
+              },
+              {
+                "name": "Draw",
+                "price": 3.5
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "96395d8faab66cf7b72830844f66eda7",
     "sport_key": "soccer_epl",
     "sport_title": "EPL",
@@ -430,11 +405,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Chelsea",
@@ -455,11 +430,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Chelsea",
@@ -490,11 +465,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Arsenal",
@@ -515,11 +490,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:57Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Arsenal",
@@ -550,11 +525,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-06-30T01:21:22Z",
+        "last_update": "2025-07-05T21:18:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:21:22Z",
+            "last_update": "2025-07-05T21:18:38Z",
             "outcomes": [
               {
                 "name": "Everton",
@@ -575,11 +550,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-06-30T01:13:58Z",
+        "last_update": "2025-07-05T21:11:33Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-06-30T01:13:58Z",
+            "last_update": "2025-07-05T21:11:33Z",
             "outcomes": [
               {
                 "name": "Everton",

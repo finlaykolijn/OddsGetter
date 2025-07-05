@@ -48,14 +48,14 @@ async function checkBookmakers() {
         const match = sports.find(sport => sport.key === possibleKey);
         if (match) {
           leaguesToCheck.push({ name: targetLeague.name, key: match.key });
-          console.log(`✓ Found ${targetLeague.name} as "${match.title}" with key "${match.key}"`);
+          console.log(`[FOUND] ${targetLeague.name} as "${match.title}" with key "${match.key}"`);
           found = true;
           break;
         }
       }
       
       if (!found) {
-        console.log(`✗ Could not find ${targetLeague.name} in available sports`);
+        console.log(`[NOT FOUND] Could not find ${targetLeague.name} in available sports`);
       }
     }
     
@@ -151,36 +151,36 @@ async function checkBookmakers() {
     const bet365Matches = checkForBookmaker('bet365');
     console.log('\nBet365 bookmakers:');
     if (bet365Matches.length > 0) {
-      bet365Matches.forEach(match => console.log(`  ✓ ${match}`));
+      bet365Matches.forEach(match => console.log(`  [FOUND] ${match}`));
     } else {
-      console.log('  ✗ No Bet365 bookmakers found');
+      console.log('  [NOT FOUND] No Bet365 bookmakers found');
     }
     
     //Check for PointsBet
     const pointsBetMatches = checkForBookmaker('pointsbet');
     console.log('\nPointsBet bookmakers:');
     if (pointsBetMatches.length > 0) {
-      pointsBetMatches.forEach(match => console.log(`  ✓ ${match}`));
+      pointsBetMatches.forEach(match => console.log(`  [FOUND] ${match}`));
     } else {
-      console.log('  ✗ No PointsBet bookmakers found');
+      console.log('  [NOT FOUND] No PointsBet bookmakers found');
     }
     
     //Check for FanDuel
     const fanduelMatches = checkForBookmaker('fanduel');
     console.log('\nFanDuel bookmakers:');
     if (fanduelMatches.length > 0) {
-      fanduelMatches.forEach(match => console.log(`  ✓ ${match}`));
+      fanduelMatches.forEach(match => console.log(`  [FOUND] ${match}`));
     } else {
-      console.log('  ✗ No FanDuel bookmakers found');
+      console.log('  [NOT FOUND] No FanDuel bookmakers found');
     }
     
     //Check for DraftKings
     const draftkingsMatches = checkForBookmaker('draftkings');
     console.log('\nDraftKings bookmakers:');
     if (draftkingsMatches.length > 0) {
-      draftkingsMatches.forEach(match => console.log(`  ✓ ${match}`));
+      draftkingsMatches.forEach(match => console.log(`  [FOUND] ${match}`));
     } else {
-      console.log('  ✗ No DraftKings bookmakers found');
+      console.log('  [NOT FOUND] No DraftKings bookmakers found');
     }
     
     //Save to a JSON file

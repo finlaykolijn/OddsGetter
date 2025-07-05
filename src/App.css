@@ -1,0 +1,604 @@
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+  
+#root {
+    min-height: 100vh;
+    min-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+
+.app {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-sizing: border-box;
+    overflow: auto; /* allow scrolling if needed */
+    min-height: 0;
+    min-width: 0;
+}
+  
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+  padding: 20px;
+}
+
+.app-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.app-header p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.app-main {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    background: white;
+    border-radius: 20px;
+    padding: clamp(20px, 4vw, 30px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+}
+  
+
+/* Home View Styles */
+.home-view {
+  text-align: center;
+}
+
+.welcome-section {
+  margin-bottom: 40px;
+}
+
+.welcome-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.welcome-section p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #666;
+}
+
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: clamp(20px, 4vw, 30px);
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card h3 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin: 0 0 10px 0;
+}
+
+.stat-card p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 30px);
+  border-radius: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Teams View Styles */
+.teams-view {
+  text-align: center;
+}
+
+.teams-view h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.team-card {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.team-card h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+/* Matches View Styles */
+.matches-view {
+  text-align: center;
+}
+
+.matches-view h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Odds View Styles */
+.odds-view {
+  text-align: center;
+}
+
+.odds-view h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Back Button */
+.back-button {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.back-button:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.controls {
+  margin-bottom: 30px;
+}
+
+.team-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.team-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team-input label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.team-input select {
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: white;
+  min-width: 200px;
+  max-width: 100%;
+  transition: border-color 0.3s ease;
+  color: #222;
+}
+
+.team-input select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.team-input option {
+  color: #222;
+  background: #fff;
+}
+
+.vs-divider {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.secondary-button {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #fcc;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+.odds-display h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.matches-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.match-card {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.home-team {
+  color: #28a745;
+}
+
+.away-team {
+  color: #dc3545;
+}
+
+.vs {
+  color: #666;
+  font-weight: normal;
+}
+
+.match-time {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.odds-table {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.odds-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  background: #667eea;
+  color: white;
+  padding: 15px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 600px;
+}
+
+.odds-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+  min-width: 600px;
+}
+
+.odds-row:last-child {
+  border-bottom: none;
+}
+
+.bookmaker {
+  font-weight: 600;
+  color: #333;
+}
+
+.odds {
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.home-win {
+  color: #28a745;
+}
+
+.draw {
+  color: #ffc107;
+}
+
+.away-win {
+  color: #dc3545;
+}
+
+.updated {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .teams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 10px;
+  }
+  
+  .app-main {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .teams-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-selector {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .team-input select {
+    min-width: 100%;
+  }
+  
+  .vs-divider {
+    margin: 0;
+  }
+  
+  .match-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .odds-header,
+  .odds-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    min-width: auto;
+  }
+  
+  .odds-header span,
+  .odds-row span {
+    padding: 5px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  .welcome-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .teams-view h2,
+  .matches-view h2,
+  .odds-view h2 {
+    font-size: 1.5rem;
+  }
+  
+  .stat-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+} 
