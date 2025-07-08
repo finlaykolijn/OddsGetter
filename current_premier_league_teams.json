@@ -1,0 +1,31 @@
+{
+  "current_teams": [
+    "Arsenal",
+    "Aston Villa",
+    "Bournemouth",
+    "Brentford",
+    "Brighton and Hove Albion",
+    "Burnley",
+    "Chelsea",
+    "Crystal Palace",
+    "Everton",
+    "Fulham",
+    "Leeds United",
+    "Liverpool",
+    "Manchester City",
+    "Manchester United",
+    "Newcastle United",
+    "Nottingham Forest",
+    "Sunderland",
+    "Tottenham Hotspur",
+    "West Ham United",
+    "Wolverhampton Wanderers"
+  ],
+  "relegated_teams": [
+    "Leicester City",
+    "Southampton",
+    "Ipswich Town"
+  ],
+  "season": "2025/26",
+  "last_updated": "2024-06-19"
+} 

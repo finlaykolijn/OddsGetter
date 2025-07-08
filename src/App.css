@@ -46,6 +46,53 @@ html, body, #root {
   opacity: 0.9;
 }
 
+.header-controls {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.season-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.season-selector label {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.season-select {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.season-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.season-select option {
+  background: white;
+  color: #333;
+  padding: 8px;
+}
+
 .nav-menu {
   display: flex;
   justify-content: center;

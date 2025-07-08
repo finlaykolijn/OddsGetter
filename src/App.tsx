@@ -2,6 +2,7 @@ import React, { useState, useEffect, Component, ErrorInfo, ReactNode } from 'rea
 import './App.css';
 import OddsDisplay from './components/OddsDisplay';
 import TeamSelector from './components/TeamSelector';
+import SeasonSelector, { Season } from './components/SeasonSelector';
 import { Match, Team } from './types';
 
 type View = 'home' | 'teams' | 'matches' | 'odds';
@@ -21,7 +22,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
     console.error('Error caught by boundary:', error, errorInfo);
   }
 
-  render() {
+  override render() {
     if (this.state.hasError) {
       return (
         <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>
@@ -45,21 +46,50 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const [currentView, setCurrentView] = useState<View>('home');
+  const [seasons, setSeasons] = useState<Season[]>([]);
+  const [selectedSeason, setSelectedSeason] = useState<string>('2025-26');
+
+  const handleSeasonChange = (seasonId: string) => {
+    console.log(`Season changed from ${selectedSeason} to ${seasonId}`);
+    setSelectedSeason(seasonId);
+  };
 
   useEffect(() => {
-    fetchTeams();
-    fetchAllMatches();
+    fetchSeasons();
   }, []);
 
-  const fetchTeams = async () => {
+  useEffect(() => {
+    if (seasons.length > 0) {
+      fetchTeams();
+      fetchAllMatches();
+    }
+  }, [selectedSeason, seasons.length]);
+
+  const fetchSeasons = async () => {
     try {
-      console.log('Fetching teams...');
-      const response = await fetch('/api/teams');
+      console.log('Fetching seasons...');
+      const response = await fetch('/api/seasons');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log('Teams data:', data);
+      console.log('Seasons data:', data);
+      setSeasons(data);
+    } catch (err) {
+      console.error('Error fetching seasons:', err);
+      setError('Failed to fetch seasons');
+    }
+  };
+
+  const fetchTeams = async () => {
+    try {
+      console.log(`Fetching teams for season: ${selectedSeason}`);
+      const response = await fetch(`/api/teams?season=${selectedSeason}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(`Teams data for ${selectedSeason}:`, data);
       setTeams(data);
     } catch (err) {
       console.error('Error fetching teams:', err);
@@ -69,13 +99,13 @@ function App() {
 
   const fetchAllMatches = async () => {
     try {
-      console.log('Fetching all matches...');
-      const response = await fetch('/api/matches');
+      console.log(`Fetching all matches for season: ${selectedSeason}`);
+      const response = await fetch(`/api/matches?season=${selectedSeason}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log('All matches data:', data);
+      console.log(`All matches data for ${selectedSeason}:`, data);
       setAllMatches(data);
     } catch (err) {
       console.error('Error fetching matches:', err);
@@ -96,6 +126,7 @@ function App() {
       const params = new URLSearchParams();
       if (selectedHomeTeam) params.append('homeTeam', selectedHomeTeam);
       if (selectedAwayTeam) params.append('awayTeam', selectedAwayTeam);
+      params.append('season', selectedSeason);
 
       console.log('Fetching matches with params:', params.toString());
       const response = await fetch(`/api/matches?${params}`);
@@ -280,6 +311,14 @@ function App() {
       <header className="app-header">
         <h1>⚽ OddsGetter</h1>
         <p>Premier League Odds Tracker</p>
+        
+        <div className="header-controls">
+          <SeasonSelector
+            seasons={seasons}
+            selectedSeason={selectedSeason}
+            onSeasonChange={handleSeasonChange}
+          />
+        </div>
         
         <nav className="nav-menu">
           <button 

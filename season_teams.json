@@ -1,0 +1,80 @@
+{
+  "2025-26": {
+    "teams": [
+      "Arsenal",
+      "Aston Villa",
+      "Bournemouth",
+      "Brentford",
+      "Brighton and Hove Albion",
+      "Burnley",
+      "Chelsea",
+      "Crystal Palace",
+      "Everton",
+      "Fulham",
+      "Leeds United",
+      "Liverpool",
+      "Manchester City",
+      "Manchester United",
+      "Newcastle United",
+      "Nottingham Forest",
+      "Sunderland",
+      "Tottenham Hotspur",
+      "West Ham United",
+      "Wolverhampton Wanderers"
+    ],
+    "relegated_from_previous": ["Leicester City", "Southampton", "Ipswich Town"],
+    "promoted": ["Burnley", "Leeds United", "Sunderland"]
+  },
+  "2024-25": {
+    "teams": [
+      "Arsenal",
+      "Aston Villa",
+      "Bournemouth",
+      "Brentford",
+      "Brighton and Hove Albion",
+      "Chelsea",
+      "Crystal Palace",
+      "Everton",
+      "Fulham",
+      "Ipswich Town",
+      "Leicester City",
+      "Liverpool",
+      "Manchester City",
+      "Manchester United",
+      "Newcastle United",
+      "Nottingham Forest",
+      "Southampton",
+      "Tottenham Hotspur",
+      "West Ham United",
+      "Wolverhampton Wanderers"
+    ],
+    "relegated_from_previous": ["Burnley", "Luton Town", "Sheffield United"],
+    "promoted": ["Ipswich Town", "Leicester City", "Southampton"]
+  },
+  "2023-24": {
+    "teams": [
+      "Arsenal",
+      "Aston Villa",
+      "Bournemouth",
+      "Brentford",
+      "Brighton and Hove Albion",
+      "Burnley",
+      "Chelsea",
+      "Crystal Palace",
+      "Everton",
+      "Fulham",
+      "Liverpool",
+      "Luton Town",
+      "Manchester City",
+      "Manchester United",
+      "Newcastle United",
+      "Nottingham Forest",
+      "Sheffield United",
+      "Tottenham Hotspur",
+      "West Ham United",
+      "Wolverhampton Wanderers"
+    ],
+    "relegated_from_previous": ["Leeds United", "Leicester City", "Southampton"],
+    "promoted": ["Burnley", "Luton Town", "Sheffield United"]
+  }
+} 
