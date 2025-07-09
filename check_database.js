@@ -1,42 +1,170 @@
-const pool = require('./db/config').default;
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'odds_database',
+  password: 'Liverpool1892',
+  port: 5432,
+});
 
 async function checkDatabase() {
   try {
-    console.log('Checking database contents...\n');
-
-    // Check all teams in database
-    console.log('=== All Teams in Database ===');
-    const teamsResult = await pool.query(`
-      SELECT DISTINCT home_team as team FROM games 
-      UNION 
-      SELECT DISTINCT away_team as team FROM games 
-      ORDER BY team
+    console.log('=== DATABASE ANALYSIS ===\n');
+    
+    // 1. Total games count
+    const totalGames = await pool.query('SELECT COUNT(*) as count FROM games');
+    console.log(`1. Total games in database: ${totalGames.rows[0].count}`);
+    
+    // 2. Games by season (using date ranges)
+    const seasonRanges = {
+      '2025-26': { start: '2025-08-01', end: '2026-05-31' },
+      '2024-25': { start: '2024-08-01', end: '2025-05-31' },
+      '2023-24': { start: '2023-08-01', end: '2024-05-31' },
+    };
+    
+    console.log('\n2. Games by season:');
+    for (const [season, range] of Object.entries(seasonRanges)) {
+      const result = await pool.query(
+        'SELECT COUNT(*) as count FROM games WHERE commence_time >= $1 AND commence_time <= $2',
+        [range.start, range.end]
+      );
+      console.log(`   ${season}: ${result.rows[0].count} games`);
+    }
+    
+    // 3. Games with match_odds
+    const gamesWithOdds = await pool.query(`
+      SELECT COUNT(DISTINCT g.id) as count 
+      FROM games g 
+      JOIN match_odds mo ON g.id = mo.game_id
     `);
-    console.log(`Total teams: ${teamsResult.rows.length}`);
-    console.log('Teams:', teamsResult.rows.map(r => r.team));
-
-    // Check all games
-    console.log('\n=== All Games in Database ===');
-    const gamesResult = await pool.query(`
-      SELECT home_team, away_team, commence_time 
+    console.log(`\n3. Games with match odds: ${gamesWithOdds.rows[0].count}`);
+    
+    // 4. Games by season WITH match_odds
+    console.log('\n4. Games by season WITH match odds:');
+    for (const [season, range] of Object.entries(seasonRanges)) {
+      const result = await pool.query(`
+        SELECT COUNT(DISTINCT g.id) as count 
+        FROM games g 
+        JOIN match_odds mo ON g.id = mo.game_id
+        WHERE g.commence_time >= $1 AND g.commence_time <= $2
+      `, [range.start, range.end]);
+      console.log(`   ${season}: ${result.rows[0].count} games`);
+    }
+    
+    // 5. Sample of recent games
+    console.log('\n5. 10 most recent games:');
+    const recentGames = await pool.query(`
+      SELECT 
+        home_team, 
+        away_team, 
+        commence_time, 
+        sport_title,
+        created_at
       FROM games 
-      ORDER BY commence_time DESC
+      ORDER BY created_at DESC 
       LIMIT 10
     `);
-    console.log(`Total games: ${gamesResult.rows.length}`);
-    gamesResult.rows.forEach(game => {
-      console.log(`${game.home_team} vs ${game.away_team} - ${new Date(game.commence_time).toLocaleDateString()}`);
+    recentGames.rows.forEach((game, index) => {
+      console.log(`   ${index + 1}. ${game.home_team} vs ${game.away_team} (${game.commence_time})`);
     });
-
-    // Check match odds
-    console.log('\n=== Match Odds Count ===');
-    const oddsResult = await pool.query(`
-      SELECT COUNT(*) as count FROM match_odds
+    
+    // 6. Check what the API query would return for 2025-26
+    console.log('\n6. API query result for 2025-26 season:');
+    const apiQuery = await pool.query(`
+      SELECT 
+        g.home_team,
+        g.away_team,
+        g.commence_time,
+        b.title as bookmaker,
+        mo.home_win_odds,
+        mo.draw_odds,
+        mo.away_win_odds,
+        mo.last_updated
+      FROM games g
+      JOIN match_odds mo ON g.id = mo.game_id
+      JOIN bookmakers b ON mo.bookmaker_id = b.id
+      WHERE g.commence_time >= '2025-08-01' AND g.commence_time <= '2026-05-31'
+      ORDER BY g.commence_time ASC, mo.last_updated DESC
     `);
-    console.log(`Total match odds records: ${oddsResult.rows[0].count}`);
-
+    console.log(`   Games returned by API: ${apiQuery.rows.length}`);
+    
+    // Group by unique matches
+    const uniqueMatches = new Set();
+    apiQuery.rows.forEach(row => {
+      uniqueMatches.add(`${row.home_team} vs ${row.away_team} (${row.commence_time})`);
+    });
+    console.log(`   Unique matches: ${uniqueMatches.size}`);
+    
+    // 7. DETAILED ANALYSIS - Show exactly what's in the database vs what the API returns
+    console.log('\n7. DETAILED ANALYSIS:');
+    
+    // All games in 2025-26 season
+    const allGames2025 = await pool.query(`
+      SELECT id, home_team, away_team, commence_time
+      FROM games 
+      WHERE commence_time >= '2025-08-01' AND commence_time <= '2026-05-31'
+      ORDER BY commence_time
+    `);
+    console.log(`   All games in 2025-26 season: ${allGames2025.rows.length}`);
+    allGames2025.rows.forEach((game, index) => {
+      console.log(`     ${index + 1}. ${game.home_team} vs ${game.away_team} (ID: ${game.id})`);
+    });
+    
+    // Games WITH match_odds in 2025-26 season
+    const gamesWithOdds2025 = await pool.query(`
+      SELECT DISTINCT g.id, g.home_team, g.away_team, g.commence_time
+      FROM games g 
+      JOIN match_odds mo ON g.id = mo.game_id
+      WHERE g.commence_time >= '2025-08-01' AND g.commence_time <= '2026-05-31'
+      ORDER BY g.commence_time
+    `);
+    console.log(`\n   Games WITH match_odds in 2025-26 season: ${gamesWithOdds2025.rows.length}`);
+    gamesWithOdds2025.rows.forEach((game, index) => {
+      console.log(`     ${index + 1}. ${game.home_team} vs ${game.away_team} (ID: ${game.id})`);
+    });
+    
+    // Games WITHOUT match_odds in 2025-26 season
+    const gamesWithoutOdds2025 = await pool.query(`
+      SELECT g.id, g.home_team, g.away_team, g.commence_time
+      FROM games g 
+      LEFT JOIN match_odds mo ON g.id = mo.game_id
+      WHERE g.commence_time >= '2025-08-01' 
+        AND g.commence_time <= '2026-05-31'
+        AND mo.game_id IS NULL
+      ORDER BY g.commence_time
+    `);
+    console.log(`\n   Games WITHOUT match_odds in 2025-26 season: ${gamesWithoutOdds2025.rows.length}`);
+    gamesWithoutOdds2025.rows.forEach((game, index) => {
+      console.log(`     ${index + 1}. ${game.home_team} vs ${game.away_team} (ID: ${game.id})`);
+    });
+    
+    // 8. Check 2024-25 season specifically
+    console.log('\n8. 2024-25 SEASON ANALYSIS:');
+    const games2024 = await pool.query(`
+      SELECT id, home_team, away_team, commence_time
+      FROM games 
+      WHERE commence_time >= '2024-08-01' AND commence_time <= '2025-05-31'
+      ORDER BY commence_time
+    `);
+    console.log(`   All games in 2024-25 season: ${games2024.rows.length}`);
+    
+    const gamesWithOdds2024 = await pool.query(`
+      SELECT DISTINCT g.id, g.home_team, g.away_team, g.commence_time
+      FROM games g 
+      JOIN match_odds mo ON g.id = mo.game_id
+      WHERE g.commence_time >= '2024-08-01' AND g.commence_time <= '2025-05-31'
+      ORDER BY g.commence_time
+    `);
+    console.log(`   Games WITH match_odds in 2024-25 season: ${gamesWithOdds2024.rows.length}`);
+    gamesWithOdds2024.rows.forEach((game, index) => {
+      console.log(`     ${index + 1}. ${game.home_team} vs ${game.away_team} (ID: ${game.id})`);
+    });
+    
+    console.log('\n=== END ANALYSIS ===');
+    
   } catch (error) {
-    console.error('Error checking database:', error);
+    console.error('Error:', error);
   } finally {
     await pool.end();
   }

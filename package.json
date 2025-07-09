@@ -27,6 +27,7 @@
     "scrape": "tsc -p tsconfig.server.json && node scraper.js",
     "odds": "tsc -p tsconfig.server.json && node oddsDemo.js",
     "check-bookmakers": "tsc -p tsconfig.server.json && node checkBookmakers.js",
+    "check-usage": "tsc -p tsconfig.server.json && node checkApiUsage.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
