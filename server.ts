@@ -134,6 +134,167 @@ app.get('/api/bookmakers', async (req, res) => {
   }
 });
 
+// Admin API Routes
+app.post('/api/admin/update-odds', async (req, res) => {
+  try {
+    const { apiKey } = req.body;
+    
+    if (!apiKey) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'API key is required for updating odds' 
+      });
+    }
+
+    // Import the OddsApiClient and OddsService
+    const { OddsApiClient } = await import('./oddsApi');
+    const { OddsService } = await import('./db/oddsService');
+
+    const client = new OddsApiClient(apiKey);
+    const oddsService = new OddsService();
+
+    console.log('Fetching Premier League odds...');
+    const plOdds = await client.getPremierLeagueOdds();
+    
+    let savedCount = 0;
+    for (const game of plOdds) {
+      await oddsService.saveGame(game);
+      savedCount++;
+    }
+
+    res.json({ 
+      success: true, 
+      message: `Successfully updated odds for ${savedCount} games`,
+      data: { gamesProcessed: savedCount }
+    });
+  } catch (error) {
+    console.error('Error updating odds:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to update odds: ' + (error as Error).message 
+    });
+  }
+});
+
+app.post('/api/admin/refresh-teams', async (req, res) => {
+  try {
+    // This would typically fetch current Premier League teams from an API
+    // For now, we'll just return a success message
+    res.json({ 
+      success: true, 
+      message: 'Team refresh completed (placeholder implementation)',
+      data: { teamsUpdated: 20 }
+    });
+  } catch (error) {
+    console.error('Error refreshing teams:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to refresh teams: ' + (error as Error).message 
+    });
+  }
+});
+
+app.post('/api/admin/cleanup-old-data', async (req, res) => {
+  try {
+    // Remove odds older than 30 days
+    const result = await pool.query(`
+      DELETE FROM match_odds 
+      WHERE last_updated < NOW() - INTERVAL '30 days'
+    `);
+
+    // Remove games older than 90 days that have no odds
+    const gamesResult = await pool.query(`
+      DELETE FROM games 
+      WHERE commence_time < NOW() - INTERVAL '90 days'
+      AND id NOT IN (SELECT DISTINCT game_id FROM match_odds)
+    `);
+
+    res.json({ 
+      success: true, 
+      message: `Cleanup completed. Removed ${result.rowCount} old odds and ${gamesResult.rowCount} old games`,
+      data: { 
+        oddsRemoved: result.rowCount,
+        gamesRemoved: gamesResult.rowCount
+      }
+    });
+  } catch (error) {
+    console.error('Error cleaning up old data:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to cleanup old data: ' + (error as Error).message 
+    });
+  }
+});
+
+app.post('/api/admin/check-api-usage', async (req, res) => {
+  try {
+    const { apiKey } = req.body;
+    
+    if (!apiKey) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'API key is required to check usage' 
+      });
+    }
+
+    // Make a test request to check API usage
+    const { OddsApiClient } = await import('./oddsApi');
+    const client = new OddsApiClient(apiKey);
+    
+    // Get a small amount of data to check usage
+    const response = await fetch('https://api.the-odds-api.com/v4/sports', {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
+
+    const remaining = response.headers.get('x-requests-remaining');
+    const used = response.headers.get('x-requests-used');
+
+    res.json({ 
+      success: true, 
+      message: 'API usage checked successfully',
+      data: { 
+        remaining: remaining ? parseInt(remaining) : 'Unknown',
+        used: used ? parseInt(used) : 'Unknown'
+      }
+    });
+  } catch (error) {
+    console.error('Error checking API usage:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to check API usage: ' + (error as Error).message 
+    });
+  }
+});
+
+app.post('/api/admin/test-connection', async (req, res) => {
+  try {
+    // Test database connection
+    const result = await pool.query('SELECT NOW() as current_time');
+    
+    // Test basic queries
+    const teamsCount = await pool.query('SELECT COUNT(*) as count FROM games');
+    const oddsCount = await pool.query('SELECT COUNT(*) as count FROM match_odds');
+    
+    res.json({ 
+      success: true, 
+      message: 'Database connection test successful',
+      data: { 
+        currentTime: result.rows[0].current_time,
+        gamesCount: teamsCount.rows[0].count,
+        oddsCount: oddsCount.rows[0].count
+      }
+    });
+  } catch (error) {
+    console.error('Error testing database connection:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Database connection test failed: ' + (error as Error).message 
+    });
+  }
+});
+
 app.get('/api/odds/:homeTeam/:awayTeam', async (req, res) => {
   try {
     const { homeTeam, awayTeam } = req.params;

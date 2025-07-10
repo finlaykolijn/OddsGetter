@@ -1,11 +1,12 @@
-import React, { useState, useEffect, Component, ErrorInfo, ReactNode } from 'react';
+import { useState, useEffect, Component, ErrorInfo, ReactNode } from 'react';
 import './App.css';
 import OddsDisplay from './components/OddsDisplay';
 import TeamSelector from './components/TeamSelector';
 import SeasonSelector, { Season } from './components/SeasonSelector';
+import AdminPanel from './components/AdminPanel';
 import { Match, Team } from './types';
 
-type View = 'home' | 'teams' | 'matches' | 'odds';
+type View = 'home' | 'teams' | 'matches' | 'odds' | 'admin';
 
 // Error Boundary Component
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -14,7 +15,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(_error: Error) {
     return { hasError: true };
   }
 
@@ -151,6 +152,64 @@ function App() {
     setError('');
   };
 
+  // Helper function to count unique matches
+  const countUniqueMatches = (matches: Match[]): number => {
+    const uniqueMatches = new Set<string>();
+    
+    // Normalize team names to handle potential variations
+    const normalizeTeamName = (teamName: string): string => {
+      return teamName.toLowerCase().trim();
+    };
+    
+    // Group matches by teams and similar times
+    const groupedMatches: { [key: string]: { home_team: string; away_team: string; commence_time: string } } = {};
+    
+    matches.forEach((match) => {
+      const normalizedHomeTeam = normalizeTeamName(match.home_team);
+      const normalizedAwayTeam = normalizeTeamName(match.away_team);
+      const teamKey = `${normalizedHomeTeam}-${normalizedAwayTeam}`;
+      const matchTime = new Date(match.commence_time).getTime();
+      
+      // Check if we already have a match with the same teams and similar time
+      let foundGroup = false;
+      for (const [existingKey, existingMatch] of Object.entries(groupedMatches)) {
+        if (!existingMatch) continue;
+        
+        const normalizedExistingHomeTeam = normalizeTeamName(existingMatch.home_team);
+        const normalizedExistingAwayTeam = normalizeTeamName(existingMatch.away_team);
+        
+        if (normalizedHomeTeam === normalizedExistingHomeTeam && 
+            normalizedAwayTeam === normalizedExistingAwayTeam) {
+          
+          // Check if times are within 2 days of each other
+          const existingTime = new Date(existingMatch.commence_time).getTime();
+          const timeDifference = Math.abs(matchTime - existingTime);
+          const twoDaysInMs = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds
+          
+          if (timeDifference <= twoDaysInMs) {
+            // Use the existing group key
+            uniqueMatches.add(existingKey);
+            foundGroup = true;
+            break;
+          }
+        }
+      }
+      
+      // If no matching group found, create a new one
+      if (!foundGroup) {
+        const newKey = `${teamKey}-${match.commence_time}`;
+        groupedMatches[newKey] = {
+          home_team: match.home_team,
+          away_team: match.away_team,
+          commence_time: match.commence_time
+        };
+        uniqueMatches.add(newKey);
+      }
+    });
+    
+    return uniqueMatches.size;
+  };
+
   const renderHomeView = () => (
     <div className="home-view">
       <div className="welcome-section">
@@ -164,7 +223,7 @@ function App() {
           <p>Teams Available</p>
         </div>
         <div className="stat-card">
-          <h3>{allMatches.length}</h3>
+          <h3>{countUniqueMatches(allMatches)}</h3>
           <p>Matches Available</p>
         </div>
         <div className="stat-card">
@@ -306,6 +365,10 @@ function App() {
     </div>
   );
 
+  const renderAdminView = () => (
+    <AdminPanel onBack={() => setCurrentView('home')} />
+  );
+
   return (
     <div className="app">
       <header className="app-header">
@@ -345,6 +408,12 @@ function App() {
           >
             Search Odds
           </button>
+          <button 
+            onClick={() => setCurrentView('admin')}
+            className={`nav-link admin-link ${currentView === 'admin' ? 'active' : ''}`}
+          >
+            🔧 Admin
+          </button>
         </nav>
       </header>
 
@@ -354,6 +423,7 @@ function App() {
           {currentView === 'teams' && renderTeamsView()}
           {currentView === 'matches' && renderMatchesView()}
           {currentView === 'odds' && renderOddsView()}
+          {currentView === 'admin' && renderAdminView()}
         </ErrorBoundary>
       </main>
     </div>
