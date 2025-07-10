@@ -1,16 +1,22 @@
-import { OddsApiClient } from './oddsApi';
+import { OddsApiClient } from '../../server/oddsApi';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 
 // Load environment variables from .env file
-dotenv.config();
+require('dotenv').config();
 
-const API_KEY = process.env.ODDS_API_KEY || 'YOUR_API_KEY';
+const API_KEY = process.env.ODDS_API_KEY;
+
+if (!API_KEY) {
+  console.error('Error: ODDS_API_KEY environment variable is required');
+  console.error('Please set ODDS_API_KEY in your .env file');
+  process.exit(1);
+}
 
 async function checkBookmakers() {
-  const client = new OddsApiClient(API_KEY);
-  
   try {
+    const client = new OddsApiClient(API_KEY!);
+  
     //Get all available sports to verify API connection works
     console.log('Fetching available sports...');
     const sports = await client.getSports();

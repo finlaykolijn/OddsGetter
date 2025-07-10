@@ -1,10 +1,10 @@
 import { useState, useEffect, Component, ErrorInfo, ReactNode } from 'react';
-import './App.css';
-import OddsDisplay from './components/OddsDisplay';
-import TeamSelector from './components/TeamSelector';
-import SeasonSelector, { Season } from './components/SeasonSelector';
-import AdminPanel from './components/AdminPanel';
-import { Match, Team } from './types';
+import '../App.css';
+import OddsDisplay from './OddsDisplay';
+import TeamSelector from './TeamSelector';
+import SeasonSelector, { Season } from './SeasonSelector';
+import AdminPanel from './AdminPanel';
+import { Match, Team } from '../types';
 
 type View = 'home' | 'teams' | 'matches' | 'odds' | 'admin';
 

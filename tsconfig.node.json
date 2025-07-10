@@ -15,8 +15,9 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "server.ts",
+    "server/**/*",
     "db/**/*",
+    "scripts/**/*",
     "*.ts",
     "*.js"
   ],

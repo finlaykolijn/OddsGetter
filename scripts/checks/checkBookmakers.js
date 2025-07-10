@@ -46,8 +46,16 @@ const oddsApi_1 = require("./oddsApi");
 const fs = __importStar(require("fs"));
 const dotenv = __importStar(require("dotenv"));
 // Load environment variables from .env file
-dotenv.config();
-const API_KEY = process.env.ODDS_API_KEY || 'YOUR_API_KEY';
+require('dotenv').config();
+
+const API_KEY = process.env.ODDS_API_KEY;
+
+if (!API_KEY) {
+  console.error('Error: ODDS_API_KEY environment variable is required');
+  console.error('Please set ODDS_API_KEY in your .env file');
+  process.exit(1);
+}
+
 function checkBookmakers() {
     return __awaiter(this, void 0, void 0, function* () {
         const client = new oddsApi_1.OddsApiClient(API_KEY);

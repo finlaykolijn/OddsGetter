@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import pool from './db/config';
+import pool from '../db/config';
 import fs from 'fs';
 import path from 'path';
 
@@ -14,7 +14,7 @@ app.use(express.json());
 // Load season teams configuration
 const loadSeasonTeams = () => {
   try {
-    const configPath = path.join(__dirname, 'season_teams.json');
+    const configPath = path.join(__dirname, '../config/season_teams.json');
     const configData = fs.readFileSync(configPath, 'utf8');
     return JSON.parse(configData);
   } catch (error) {
@@ -26,7 +26,7 @@ const loadSeasonTeams = () => {
 // Load current Premier League teams configuration (for backward compatibility)
 const loadCurrentTeams = () => {
   try {
-    const configPath = path.join(__dirname, 'current_premier_league_teams.json');
+    const configPath = path.join(__dirname, '../config/current_premier_league_teams.json');
     const configData = fs.readFileSync(configPath, 'utf8');
     return JSON.parse(configData);
   } catch (error) {
@@ -148,7 +148,7 @@ app.post('/api/admin/update-odds', async (req, res) => {
 
     // Import the OddsApiClient and OddsService
     const { OddsApiClient } = await import('./oddsApi');
-    const { OddsService } = await import('./db/oddsService');
+    const { OddsService } = await import('../db/oddsService');
 
     const client = new OddsApiClient(apiKey);
     const oddsService = new OddsService();

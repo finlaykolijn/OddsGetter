@@ -1,4 +1,4 @@
-const pool = require('./db/config').default;
+const pool = require('../../db/config').default;
 
 async function testSeasons() {
   try {

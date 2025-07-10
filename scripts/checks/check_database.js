@@ -1,11 +1,19 @@
 const { Pool } = require('pg');
+require('dotenv').config();
+
+// Check if required environment variables are set
+if (!process.env.DB_PASSWORD) {
+  console.error('Error: DB_PASSWORD environment variable is required');
+  console.error('Please set DB_PASSWORD in your .env file');
+  process.exit(1);
+}
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'odds_database',
-  password: 'Liverpool1892',
-  port: 5432,
+  user: process.env.DB_USER || 'postgres',
+  host: process.env.DB_HOST || 'localhost',
+  database: process.env.DB_NAME || 'odds_database',
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT || '5432'),
 });
 
 async function checkDatabase() {

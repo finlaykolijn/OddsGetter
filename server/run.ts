@@ -1,6 +1,6 @@
-import { initializeDatabase } from './db/init';
-import { OddsService } from './db/oddsService';
-import { OddsApiClient } from './oddsApi';
+import { initializeDatabase } from '../db/init';
+import { OddsService } from '../db/oddsService';
+import { OddsApiClient } from '../server/oddsApi';
 import * as fs from 'fs';
 import dotenv from 'dotenv';
 
@@ -15,7 +15,14 @@ async function main() {
         console.log('Database initialized successfully!');
 
         // Initialize services
-        const apiKey = process.env.ODDS_API_KEY || 'YOUR_API_KEY';
+        const apiKey = process.env.ODDS_API_KEY;
+
+        if (!apiKey) {
+            console.error('Error: ODDS_API_KEY environment variable is required');
+            console.error('Please set ODDS_API_KEY in your .env file');
+            process.exit(1);
+        }
+
         const client = new OddsApiClient(apiKey);
         const oddsService = new OddsService();
 

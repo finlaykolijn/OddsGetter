@@ -1,5 +1,5 @@
 import pool from './config';
-import { Game, Bookmaker } from '../oddsApi';
+import { Game, Bookmaker } from '../server/oddsApi';
 
 export class OddsService {
     async saveGame(game: Game) {

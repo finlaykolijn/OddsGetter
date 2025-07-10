@@ -1,28 +1,20 @@
-import fs from 'fs';
-import path from 'path';
-import pool from './db/config';
-import readline from 'readline';
-
-interface TeamConfig {
-  current_teams: string[];
-  relegated_teams: string[];
-  season: string;
-  last_updated: string;
-}
+const fs = require('fs');
+const path = require('path');
+const pool = require('../../db/config').default;
 
 // Load current Premier League teams configuration
-const loadCurrentTeams = (): TeamConfig => {
+const loadCurrentTeams = () => {
   try {
     const configPath = path.join(__dirname, 'current_premier_league_teams.json');
     const configData = fs.readFileSync(configPath, 'utf8');
     return JSON.parse(configData);
   } catch (error) {
     console.error('Error loading team configuration:', error);
-    return { current_teams: [], relegated_teams: [], season: '', last_updated: '' };
+    return { current_teams: [], relegated_teams: [] };
   }
 };
 
-async function cleanupRelegatedTeams(): Promise<void> {
+async function cleanupRelegatedTeams() {
   try {
     console.log('Starting cleanup of relegated teams...');
     
@@ -49,7 +41,7 @@ async function cleanupRelegatedTeams(): Promise<void> {
     const gamesResult = await pool.query(gamesQuery, relegatedTeams);
     console.log(`Found ${gamesResult.rows.length} games involving relegated teams:`);
     
-    gamesResult.rows.forEach((game: any) => {
+    gamesResult.rows.forEach(game => {
       console.log(`  - ${game.home_team} vs ${game.away_team} (${new Date(game.commence_time).toLocaleDateString()})`);
     });
     
@@ -59,12 +51,13 @@ async function cleanupRelegatedTeams(): Promise<void> {
     }
     
     // Ask for confirmation
+    const readline = require('readline');
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     });
     
-    const answer = await new Promise<string>(resolve => {
+    const answer = await new Promise(resolve => {
       rl.question(`\nDo you want to delete these ${gamesResult.rows.length} games? (yes/no): `, resolve);
     });
     rl.close();
@@ -75,7 +68,7 @@ async function cleanupRelegatedTeams(): Promise<void> {
     }
     
     // Delete match odds first (due to foreign key constraints)
-    const gameIds = gamesResult.rows.map((game: any) => game.id);
+    const gameIds = gamesResult.rows.map(game => game.id);
     const gameIdsPlaceholders = gameIds.map((_, index) => `$${index + 1}`).join(',');
     
     console.log('Deleting match odds...');

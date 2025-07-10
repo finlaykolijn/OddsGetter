@@ -1,5 +1,5 @@
 import { OddsApiClient } from './oddsApi';
-import { OddsService } from './db/oddsService';
+import { OddsService } from '../db/oddsService';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 
@@ -10,7 +10,7 @@ dotenv.config();
 const API_KEY = process.env.ODDS_API_KEY || '';
 
 // Check if API key is available
-if (!API_KEY || API_KEY === 'YOUR_API_KEY') {
+if (!API_KEY) {
   console.error('Error: ODDS_API_KEY not found in environment variables or .env file');
   console.error('Please ensure you have a valid API key in your .env file: ODDS_API_KEY=your_actual_api_key');
   process.exit(1);
