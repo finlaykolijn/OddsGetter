@@ -14,7 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const fs_1 = require("fs");
+const path_1 = require("path");
 const config_1 = __importDefault(require("../db/config"));
+
+// Load environment variables
+dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
 
@@ -29,7 +35,7 @@ const SEASON_DATE_RANGES = {
 // Load current Premier League teams configuration (for backward compatibility)
 const loadCurrentTeams = () => {
     try {
-        const configPath = (0, path_1.join)(__dirname, 'current_premier_league_teams.json');
+        const configPath = (0, path_1.join)(__dirname, '../config/current_premier_league_teams.json');
         const configData = (0, fs_1.readFileSync)(configPath, 'utf8');
         return JSON.parse(configData);
     }
