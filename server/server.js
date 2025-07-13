@@ -1,42 +1,35 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const dotenv_1 = __importDefault(require("dotenv"));
+const express_1 = require("express");
+const cors_1 = require("cors");
+const dotenv_1 = require("dotenv");
+const config_1 = require("../db/config");
 const fs_1 = require("fs");
 const path_1 = require("path");
-const config_1 = __importDefault(require("../db/config"));
-
 // Load environment variables
-dotenv_1.default.config();
-const app = (0, express_1.default)();
+dotenv_1.config();
+const app = (0, express_1)();
 const PORT = process.env.PORT || 5000;
-
-// Define season date ranges
-const SEASON_DATE_RANGES = {
-    '2025-26': { start: '2025-08-01', end: '2026-05-31' },
-    '2024-25': { start: '2024-08-01', end: '2025-05-31' },
-    '2023-24': { start: '2023-08-01', end: '2024-05-31' },
+// Middleware
+app.use((0, cors_1)());
+app.use(express_1.json());
+// Load season teams configuration
+const loadSeasonTeams = () => {
+    try {
+        const configPath = path_1.default.join(__dirname, '../config/season_teams.json');
+        const configData = fs_1.default.readFileSync(configPath, 'utf8');
+        return JSON.parse(configData);
+    }
+    catch (error) {
+        console.error('Error loading season teams configuration:', error);
+        return {};
+    }
 };
-
-
 // Load current Premier League teams configuration (for backward compatibility)
 const loadCurrentTeams = () => {
     try {
-        const configPath = (0, path_1.join)(__dirname, '../config/current_premier_league_teams.json');
-        const configData = (0, fs_1.readFileSync)(configPath, 'utf8');
+        const configPath = path_1.default.join(__dirname, '../config/current_premier_league_teams.json');
+        const configData = fs_1.default.readFileSync(configPath, 'utf8');
         return JSON.parse(configData);
     }
     catch (error) {
@@ -44,11 +37,14 @@ const loadCurrentTeams = () => {
         return { current_teams: [] };
     }
 };
-// Middleware
-app.use((0, cors_1.default)());
-app.use(express_1.default.json());
+// Define season date ranges
+const SEASON_DATE_RANGES = {
+    '2025-26': { start: '2025-08-01', end: '2026-05-31' },
+    '2024-25': { start: '2024-08-01', end: '2025-05-31' },
+    '2023-24': { start: '2023-08-01', end: '2024-05-31' },
+};
 // API Routes
-app.get('/api/seasons', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/seasons', async (req, res) => {
     try {
         const seasons = [
             { id: '2025-26', name: '25/26', year: '2025/26', isCurrent: true },
@@ -61,30 +57,23 @@ app.get('/api/seasons', (req, res) => __awaiter(void 0, void 0, void 0, function
         console.error('Error fetching seasons:', error);
         res.status(500).json({ error: 'Failed to fetch seasons' });
     }
-}));
-
-app.get('/api/teams', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+app.get('/api/teams', async (req, res) => {
     try {
         const { season = '2025-26', league = 'soccer_epl' } = req.query;
         console.log(`API /api/teams called with: season=${season}, league=${league}`);
-        
         const range = SEASON_DATE_RANGES[season];
         if (!range) {
             return res.status(400).json({ error: 'Invalid season' });
         }
-        
         console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
-        
         // Find all teams that played a game in the season's date range and league
-        const result = yield config_1.default.query(`
-      SELECT DISTINCT team FROM (
+        const result = await config_1.default.query(`SELECT DISTINCT team FROM (
         SELECT home_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
         UNION
         SELECT away_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
       ) t
-      ORDER BY team
-    `, [range.start, range.end, league]);
-        
+      ORDER BY team`, [range.start, range.end, league]);
         console.log(`Teams query returned ${result.rows.length} teams`);
         res.json(result.rows);
     }
@@ -92,17 +81,15 @@ app.get('/api/teams', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.error('Error fetching teams:', error);
         res.status(500).json({ error: 'Failed to fetch teams' });
     }
-}));
-app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+app.get('/api/matches', async (req, res) => {
     try {
         const { homeTeam, awayTeam, season = '2025-26', league = 'soccer_epl' } = req.query;
         console.log(`API /api/matches called with: season=${season}, league=${league}, homeTeam=${homeTeam}, awayTeam=${awayTeam}`);
-        
         const range = SEASON_DATE_RANGES[season];
         if (!range) {
             return res.status(400).json({ error: 'Invalid season' });
         }
-        
         let query = `
       SELECT 
         g.home_team,
@@ -119,9 +106,7 @@ app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function
       WHERE g.commence_time >= $1 AND g.commence_time <= $2 AND g.sport_key = $3
     `;
         const params = [range.start, range.end, league];
-        
         console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
-        
         if (homeTeam) {
             params.push(homeTeam);
             query += ` AND g.home_team = $${params.length}`;
@@ -131,23 +116,20 @@ app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function
             query += ` AND g.away_team = $${params.length}`;
         }
         query += ` ORDER BY g.commence_time ASC, mo.last_updated DESC`;
-        
         console.log(`Final query: ${query}`);
         console.log(`Final params: ${JSON.stringify(params)}`);
-        
-        const result = yield config_1.default.query(query, params);
+        const result = await config_1.default.query(query, params);
         console.log(`Query returned ${result.rows.length} rows`);
-        
         res.json(result.rows);
     }
     catch (error) {
         console.error('Error fetching matches:', error);
         res.status(500).json({ error: 'Failed to fetch matches' });
     }
-}));
-app.get('/api/bookmakers', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+app.get('/api/bookmakers', async (req, res) => {
     try {
-        const result = yield config_1.default.query(`
+        const result = await config_1.default.query(`
       SELECT DISTINCT title FROM bookmakers 
       ORDER BY title
     `);
@@ -157,15 +139,176 @@ app.get('/api/bookmakers', (req, res) => __awaiter(void 0, void 0, void 0, funct
         console.error('Error fetching bookmakers:', error);
         res.status(500).json({ error: 'Failed to fetch bookmakers' });
     }
-}));
-app.get('/api/odds/:homeTeam/:awayTeam', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+// Admin API Routes
+app.post('/api/admin/update-odds', async (req, res) => {
+    try {
+        const { apiKey } = req.body;
+        if (!apiKey) {
+            return res.status(400).json({
+                success: false,
+                message: 'API key is required for updating odds'
+            });
+        }
+        // Import the OddsApiClient and OddsService
+        const { OddsApiClient } = await Promise.resolve().then(() => require('./oddsApi'));
+        const { OddsService } = await Promise.resolve().then(() => require('../db/oddsService'));
+        const client = new OddsApiClient(apiKey);
+        const oddsService = new OddsService();
+        // Define supported leagues
+        const leagues = [
+            { name: 'Premier League', key: 'soccer_epl' },
+            { name: 'La Liga', key: 'soccer_spain_la_liga' },
+            { name: 'Bundesliga', key: 'soccer_germany_bundesliga' },
+        ];
+        let summary = {};
+        for (const league of leagues) {
+            console.log(`Fetching odds for ${league.name}...`);
+            const odds = await client.getLeagueOdds(league.key);
+            let savedCount = 0;
+            for (const game of odds) {
+                await oddsService.saveGame(game);
+                savedCount++;
+            }
+            summary[league.name] = savedCount;
+        }
+        res.json({
+            success: true,
+            message: `Successfully updated odds for all leagues`,
+            data: { gamesProcessed: summary }
+        });
+    }
+    catch (error) {
+        console.error('Error updating odds:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to update odds: ' + error.message
+        });
+    }
+});
+app.post('/api/admin/refresh-teams', async (req, res) => {
+    try {
+        // This would typically fetch current Premier League teams from an API
+        // For now, we'll just return a success message
+        res.json({
+            success: true,
+            message: 'Team refresh completed (placeholder implementation)',
+            data: { teamsUpdated: 20 }
+        });
+    }
+    catch (error) {
+        console.error('Error refreshing teams:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to refresh teams: ' + error.message
+        });
+    }
+});
+app.post('/api/admin/cleanup-old-data', async (req, res) => {
+    try {
+        // Remove odds older than 30 days
+        const result = await config_1.default.query(`
+      DELETE FROM match_odds 
+      WHERE last_updated < NOW() - INTERVAL '30 days'
+    `);
+        // Remove games older than 90 days that have no odds
+        const gamesResult = await config_1.default.query(`
+      DELETE FROM games 
+      WHERE commence_time < NOW() - INTERVAL '90 days'
+      AND id NOT IN (SELECT DISTINCT game_id FROM match_odds)
+    `);
+        res.json({
+            success: true,
+            message: `Cleanup completed. Removed ${result.rowCount} old odds and ${gamesResult.rowCount} old games`,
+            data: {
+                oddsRemoved: result.rowCount,
+                gamesRemoved: gamesResult.rowCount
+            }
+        });
+    }
+    catch (error) {
+        console.error('Error cleaning up old data:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to cleanup old data: ' + error.message
+        });
+    }
+});
+app.post('/api/admin/check-api-usage', async (req, res) => {
+    try {
+        const { apiKey } = req.body;
+        if (!apiKey) {
+            return res.status(400).json({
+                success: false,
+                message: 'API key is required to check usage'
+            });
+        }
+        // Make a test request to check API usage
+        const { OddsApiClient } = await Promise.resolve().then(() => require('./oddsApi'));
+        const client = new OddsApiClient(apiKey);
+        // Get a small amount of data to check usage
+        const response = await fetch('https://api.the-odds-api.com/v4/sports', {
+            headers: {
+                'x-api-key': apiKey
+            }
+        });
+        const remaining = response.headers.get('x-requests-remaining');
+        const used = response.headers.get('x-requests-used');
+        res.json({
+            success: true,
+            message: 'API usage checked successfully',
+            data: {
+                remaining: remaining ? parseInt(remaining) : 'Unknown',
+                used: used ? parseInt(used) : 'Unknown'
+            }
+        });
+    }
+    catch (error) {
+        console.error('Error checking API usage:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to check API usage: ' + error.message
+        });
+    }
+});
+app.post('/api/admin/test-connection', async (req, res) => {
+    try {
+        // Test database connection
+        const result = await config_1.default.query('SELECT NOW() as current_time');
+        // Test basic queries
+        const teamsCount = await config_1.default.query('SELECT COUNT(*) as count FROM games');
+        const oddsCount = await config_1.default.query('SELECT COUNT(*) as count FROM match_odds');
+        res.json({
+            success: true,
+            message: 'Database connection test successful',
+            data: {
+                currentTime: result.rows[0].current_time,
+                gamesCount: teamsCount.rows[0].count,
+                oddsCount: oddsCount.rows[0].count
+            }
+        });
+    }
+    catch (error) {
+        console.error('Error testing database connection:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Database connection test failed: ' + error.message
+        });
+    }
+});
+app.get('/api/odds/:homeTeam/:awayTeam', async (req, res) => {
     try {
         const { homeTeam, awayTeam } = req.params;
-        const { league = 'soccer_epl' } = req.query;
-        
-        console.log(`API /api/odds called with: homeTeam=${homeTeam}, awayTeam=${awayTeam}, league=${league}`);
-        
-        const result = yield config_1.default.query(`
+        // Load current Premier League teams configuration
+        const config = loadCurrentTeams();
+        const currentTeams = new Set(config.current_teams);
+        // Check if both teams are current Premier League teams
+        if (!currentTeams.has(homeTeam) || !currentTeams.has(awayTeam)) {
+            return res.status(400).json({
+                error: 'One or both teams are not current Premier League teams'
+            });
+        }
+        const result = await config_1.default.query(`
       SELECT 
         g.home_team,
         g.away_team,
@@ -180,19 +323,16 @@ app.get('/api/odds/:homeTeam/:awayTeam', (req, res) => __awaiter(void 0, void 0,
       JOIN bookmakers b ON mo.bookmaker_id = b.id
       WHERE g.home_team = $1 
         AND g.away_team = $2
-        AND g.sport_key = $3
         AND g.commence_time > CURRENT_TIMESTAMP
       ORDER BY mo.last_updated DESC
-    `, [homeTeam, awayTeam, league]);
-        
-        console.log(`Odds query returned ${result.rows.length} rows`);
+    `, [homeTeam, awayTeam]);
         res.json(result.rows);
     }
     catch (error) {
         console.error('Error fetching odds:', error);
         res.status(500).json({ error: 'Failed to fetch odds' });
     }
-}));
+});
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
