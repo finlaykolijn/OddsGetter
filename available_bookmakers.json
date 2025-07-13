@@ -1,0 +1,376 @@
+{
+  "bookmakersByRegion": {
+    "us": [
+      "betrivers",
+      "draftkings",
+      "betmgm",
+      "betonlineag",
+      "lowvig",
+      "bovada",
+      "fanduel"
+    ],
+    "uk": [
+      "paddypower",
+      "coral",
+      "betfair_sb_uk",
+      "unibet_uk",
+      "livescorebet",
+      "smarkets",
+      "grosvenor",
+      "casumo",
+      "leovegas",
+      "sport888",
+      "ladbrokes_uk",
+      "virginbet",
+      "williamhill",
+      "betvictor",
+      "boylesports",
+      "betway",
+      "betfair_ex_uk",
+      "skybet"
+    ],
+    "eu": [
+      "unibet_it",
+      "onexbet",
+      "parionssport_fr",
+      "unibet_fr",
+      "sport888",
+      "pinnacle",
+      "williamhill",
+      "betclic_fr",
+      "winamax_fr",
+      "unibet_nl",
+      "marathonbet",
+      "betonlineag",
+      "tipico_de",
+      "winamax_de",
+      "betfair_ex_eu",
+      "betsson",
+      "nordicbet",
+      "everygame"
+    ],
+    "au": [
+      "sportsbet",
+      "tabtouch",
+      "neds",
+      "ladbrokes_au",
+      "unibet",
+      "betfair_ex_au",
+      "tab",
+      "playup",
+      "betr_au",
+      "pointsbetau"
+    ]
+  },
+  "bookmakerDetails": {
+    "betrivers": {
+      "title": "BetRivers",
+      "regions": [
+        "us"
+      ]
+    },
+    "draftkings": {
+      "title": "DraftKings",
+      "regions": [
+        "us"
+      ]
+    },
+    "betmgm": {
+      "title": "BetMGM",
+      "regions": [
+        "us"
+      ]
+    },
+    "betonlineag": {
+      "title": "BetOnline.ag",
+      "regions": [
+        "us",
+        "eu"
+      ]
+    },
+    "lowvig": {
+      "title": "LowVig.ag",
+      "regions": [
+        "us"
+      ]
+    },
+    "bovada": {
+      "title": "Bovada",
+      "regions": [
+        "us"
+      ]
+    },
+    "fanduel": {
+      "title": "FanDuel",
+      "regions": [
+        "us"
+      ]
+    },
+    "paddypower": {
+      "title": "Paddy Power",
+      "regions": [
+        "uk"
+      ]
+    },
+    "coral": {
+      "title": "Coral",
+      "regions": [
+        "uk"
+      ]
+    },
+    "betfair_sb_uk": {
+      "title": "Betfair Sportsbook",
+      "regions": [
+        "uk"
+      ]
+    },
+    "unibet_uk": {
+      "title": "Unibet",
+      "regions": [
+        "uk"
+      ]
+    },
+    "livescorebet": {
+      "title": "LiveScore Bet",
+      "regions": [
+        "uk"
+      ]
+    },
+    "smarkets": {
+      "title": "Smarkets",
+      "regions": [
+        "uk"
+      ]
+    },
+    "grosvenor": {
+      "title": "Grosvenor",
+      "regions": [
+        "uk"
+      ]
+    },
+    "casumo": {
+      "title": "Casumo",
+      "regions": [
+        "uk"
+      ]
+    },
+    "leovegas": {
+      "title": "LeoVegas",
+      "regions": [
+        "uk"
+      ]
+    },
+    "sport888": {
+      "title": "888sport",
+      "regions": [
+        "uk",
+        "eu"
+      ]
+    },
+    "ladbrokes_uk": {
+      "title": "Ladbrokes",
+      "regions": [
+        "uk"
+      ]
+    },
+    "virginbet": {
+      "title": "Virgin Bet",
+      "regions": [
+        "uk"
+      ]
+    },
+    "williamhill": {
+      "title": "William Hill",
+      "regions": [
+        "uk",
+        "eu"
+      ]
+    },
+    "betvictor": {
+      "title": "Bet Victor",
+      "regions": [
+        "uk"
+      ]
+    },
+    "boylesports": {
+      "title": "BoyleSports",
+      "regions": [
+        "uk"
+      ]
+    },
+    "betway": {
+      "title": "Betway",
+      "regions": [
+        "uk"
+      ]
+    },
+    "betfair_ex_uk": {
+      "title": "Betfair",
+      "regions": [
+        "uk"
+      ]
+    },
+    "skybet": {
+      "title": "Sky Bet",
+      "regions": [
+        "uk"
+      ]
+    },
+    "unibet_it": {
+      "title": "Unibet (IT)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "onexbet": {
+      "title": "1xBet",
+      "regions": [
+        "eu"
+      ]
+    },
+    "parionssport_fr": {
+      "title": "Parions Sport (FR)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "unibet_fr": {
+      "title": "Unibet (FR)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "pinnacle": {
+      "title": "Pinnacle",
+      "regions": [
+        "eu"
+      ]
+    },
+    "betclic_fr": {
+      "title": "Betclic (FR)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "winamax_fr": {
+      "title": "Winamax (FR)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "unibet_nl": {
+      "title": "Unibet (NL)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "marathonbet": {
+      "title": "Marathon Bet",
+      "regions": [
+        "eu"
+      ]
+    },
+    "tipico_de": {
+      "title": "Tipico",
+      "regions": [
+        "eu"
+      ]
+    },
+    "winamax_de": {
+      "title": "Winamax (DE)",
+      "regions": [
+        "eu"
+      ]
+    },
+    "betfair_ex_eu": {
+      "title": "Betfair",
+      "regions": [
+        "eu"
+      ]
+    },
+    "betsson": {
+      "title": "Betsson",
+      "regions": [
+        "eu"
+      ]
+    },
+    "nordicbet": {
+      "title": "Nordic Bet",
+      "regions": [
+        "eu"
+      ]
+    },
+    "everygame": {
+      "title": "Everygame",
+      "regions": [
+        "eu"
+      ]
+    },
+    "sportsbet": {
+      "title": "SportsBet",
+      "regions": [
+        "au"
+      ]
+    },
+    "tabtouch": {
+      "title": "TABtouch",
+      "regions": [
+        "au"
+      ]
+    },
+    "neds": {
+      "title": "Neds",
+      "regions": [
+        "au"
+      ]
+    },
+    "ladbrokes_au": {
+      "title": "Ladbrokes",
+      "regions": [
+        "au"
+      ]
+    },
+    "unibet": {
+      "title": "Unibet",
+      "regions": [
+        "au"
+      ]
+    },
+    "betfair_ex_au": {
+      "title": "Betfair",
+      "regions": [
+        "au"
+      ]
+    },
+    "tab": {
+      "title": "TAB",
+      "regions": [
+        "au"
+      ]
+    },
+    "playup": {
+      "title": "PlayUp",
+      "regions": [
+        "au"
+      ]
+    },
+    "betr_au": {
+      "title": "Betr",
+      "regions": [
+        "au"
+      ]
+    },
+    "pointsbetau": {
+      "title": "PointsBet (AU)",
+      "regions": [
+        "au"
+      ]
+    }
+  },
+  "checkedLeagues": [
+    {
+      "name": "Premier League",
+      "key": "soccer_epl"
+    }
+  ]
+}

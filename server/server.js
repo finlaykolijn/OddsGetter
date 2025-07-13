@@ -65,20 +65,27 @@ app.get('/api/seasons', (req, res) => __awaiter(void 0, void 0, void 0, function
 
 app.get('/api/teams', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { season = '2025-26' } = req.query;
+        const { season = '2025-26', league = 'soccer_epl' } = req.query;
+        console.log(`API /api/teams called with: season=${season}, league=${league}`);
+        
         const range = SEASON_DATE_RANGES[season];
         if (!range) {
             return res.status(400).json({ error: 'Invalid season' });
         }
-        // Find all teams that played a game in the season's date range
+        
+        console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
+        
+        // Find all teams that played a game in the season's date range and league
         const result = yield config_1.default.query(`
       SELECT DISTINCT team FROM (
-        SELECT home_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2
+        SELECT home_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
         UNION
-        SELECT away_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2
+        SELECT away_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
       ) t
       ORDER BY team
-    `, [range.start, range.end]);
+    `, [range.start, range.end, league]);
+        
+        console.log(`Teams query returned ${result.rows.length} teams`);
         res.json(result.rows);
     }
     catch (error) {
@@ -88,11 +95,14 @@ app.get('/api/teams', (req, res) => __awaiter(void 0, void 0, void 0, function* 
 }));
 app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { homeTeam, awayTeam, season = '2025-26' } = req.query;
+        const { homeTeam, awayTeam, season = '2025-26', league = 'soccer_epl' } = req.query;
+        console.log(`API /api/matches called with: season=${season}, league=${league}, homeTeam=${homeTeam}, awayTeam=${awayTeam}`);
+        
         const range = SEASON_DATE_RANGES[season];
         if (!range) {
             return res.status(400).json({ error: 'Invalid season' });
         }
+        
         let query = `
       SELECT 
         g.home_team,
@@ -106,9 +116,12 @@ app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function
       FROM games g
       JOIN match_odds mo ON g.id = mo.game_id
       JOIN bookmakers b ON mo.bookmaker_id = b.id
-      WHERE g.commence_time >= $1 AND g.commence_time <= $2
+      WHERE g.commence_time >= $1 AND g.commence_time <= $2 AND g.sport_key = $3
     `;
-        const params = [range.start, range.end];
+        const params = [range.start, range.end, league];
+        
+        console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
+        
         if (homeTeam) {
             params.push(homeTeam);
             query += ` AND g.home_team = $${params.length}`;
@@ -118,7 +131,13 @@ app.get('/api/matches', (req, res) => __awaiter(void 0, void 0, void 0, function
             query += ` AND g.away_team = $${params.length}`;
         }
         query += ` ORDER BY g.commence_time ASC, mo.last_updated DESC`;
+        
+        console.log(`Final query: ${query}`);
+        console.log(`Final params: ${JSON.stringify(params)}`);
+        
         const result = yield config_1.default.query(query, params);
+        console.log(`Query returned ${result.rows.length} rows`);
+        
         res.json(result.rows);
     }
     catch (error) {
@@ -142,15 +161,10 @@ app.get('/api/bookmakers', (req, res) => __awaiter(void 0, void 0, void 0, funct
 app.get('/api/odds/:homeTeam/:awayTeam', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { homeTeam, awayTeam } = req.params;
-        // Load current Premier League teams configuration
-        const config = loadCurrentTeams();
-        const currentTeams = new Set(config.current_teams);
-        // Check if both teams are current Premier League teams
-        if (!currentTeams.has(homeTeam) || !currentTeams.has(awayTeam)) {
-            return res.status(400).json({ 
-                error: 'One or both teams are not current Premier League teams' 
-            });
-        }
+        const { league = 'soccer_epl' } = req.query;
+        
+        console.log(`API /api/odds called with: homeTeam=${homeTeam}, awayTeam=${awayTeam}, league=${league}`);
+        
         const result = yield config_1.default.query(`
       SELECT 
         g.home_team,
@@ -166,9 +180,12 @@ app.get('/api/odds/:homeTeam/:awayTeam', (req, res) => __awaiter(void 0, void 0,
       JOIN bookmakers b ON mo.bookmaker_id = b.id
       WHERE g.home_team = $1 
         AND g.away_team = $2
+        AND g.sport_key = $3
         AND g.commence_time > CURRENT_TIMESTAMP
       ORDER BY mo.last_updated DESC
-    `, [homeTeam, awayTeam]);
+    `, [homeTeam, awayTeam, league]);
+        
+        console.log(`Odds query returned ${result.rows.length} rows`);
         res.json(result.rows);
     }
     catch (error) {

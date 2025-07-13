@@ -1,37 +1,15 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
     };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -41,86 +19,172 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const oddsApi_1 = require("./oddsApi");
-const oddsService_1 = require("../db/oddsService");
-const fs = __importStar(require("fs"));
-const dotenv = __importStar(require("dotenv"));
+var oddsApi_1 = require("./oddsApi");
+var oddsService_1 = require("../db/oddsService");
+var fs = require("fs");
+var dotenv = require("dotenv");
 // Load environment variables from .env file
 dotenv.config();
 // Get API key from environment variables
-const API_KEY = process.env.ODDS_API_KEY || '';
-
+var API_KEY = process.env.ODDS_API_KEY || '';
 // Check if API key is available
 if (!API_KEY) {
-  console.error('Error: ODDS_API_KEY not found in environment variables or .env file');
-  console.error('Please ensure you have a valid API key in your .env file: ODDS_API_KEY=your_actual_api_key');
-  process.exit(1);
+    console.error('Error: ODDS_API_KEY not found in environment variables or .env file');
+    console.error('Please ensure you have a valid API key in your .env file: ODDS_API_KEY=your_actual_api_key');
+    process.exit(1);
 }
 // Function to deduplicate games by team names
 function deduplicateGames(games) {
-    const gameMap = new Map();
-    for (const game of games) {
-        const key = `${game.home_team}_${game.away_team}`;
+    var _a;
+    var gameMap = new Map();
+    for (var _i = 0, games_1 = games; _i < games_1.length; _i++) {
+        var game = games_1[_i];
+        var key = "".concat(game.home_team, "_").concat(game.away_team);
         if (gameMap.has(key)) {
             // Game already exists, merge bookmakers
-            const existingGame = gameMap.get(key);
-            existingGame.bookmakers.push(...game.bookmakers);
+            var existingGame = gameMap.get(key);
+            (_a = existingGame.bookmakers).push.apply(_a, game.bookmakers);
         }
         else {
             // New game, add to map
-            gameMap.set(key, Object.assign({}, game));
+            gameMap.set(key, __assign({}, game));
         }
     }
     return Array.from(gameMap.values());
 }
 function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const client = new oddsApi_1.OddsApiClient(API_KEY);
-        const oddsService = new oddsService_1.OddsService();
-        try {
-            //Get all available sports
-            console.log('Fetching available sports...');
-            const sports = yield client.getSports();
-            //Get Premier League in the sports list, key is soccer_epl
-            const premierLeague = sports.find(sport => sport.key === 'soccer_epl');
-            console.log('Premier League info:', premierLeague);
-            //Get Premier League odds
-            console.log('\nFetching Premier League odds for selected bookmakers...');
-            const plOdds = yield client.getPremierLeagueOdds();
-            // Deduplicate games by team names
-            const deduplicatedOdds = deduplicateGames(plOdds);
-            //Display the odds for FanDuel and DraftKings (Could add whichever bookmaker I want in oddsApi.ts)
-            console.log(`\nFound ${deduplicatedOdds.length} Premier League games with odds (after deduplication):`);
-            // Save each game to the database
-            for (const game of deduplicatedOdds) {
-                console.log(`\nSaving ${game.home_team} vs ${game.away_team} to database...`);
-                yield oddsService.saveGame(game);
-                // Display the odds
-                console.log(`\n${game.home_team} vs ${game.away_team} (${new Date(game.commence_time).toLocaleString()})`);
-                game.bookmakers.forEach((bookmaker) => {
-                    console.log(`  ${bookmaker.title} odds:`);
-                    bookmaker.markets.forEach((market) => {
-                        if (market.key === 'h2h') { // Can edit this to get other markets
-                            market.outcomes.forEach((outcome) => {
-                                console.log(`    ${outcome.name}: ${outcome.price}`);
-                            });
-                        }
-                    });
-                });
+    return __awaiter(this, void 0, void 0, function () {
+        var client, oddsService, sports, leagues, _loop_1, _i, leagues_1, league, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    client = new oddsApi_1.OddsApiClient(API_KEY);
+                    oddsService = new oddsService_1.OddsService();
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 7, , 8]);
+                    //Get all available sports
+                    console.log('Fetching available sports...');
+                    return [4 /*yield*/, client.getSports()];
+                case 2:
+                    sports = _a.sent();
+                    leagues = [
+                        { name: 'Premier League', key: 'soccer_epl' },
+                        { name: 'La Liga', key: 'soccer_spain_la_liga' },
+                        { name: 'Bundesliga', key: 'soccer_germany_bundesliga' },
+                    ];
+                    _loop_1 = function (league) {
+                        var leagueInfo, odds, deduplicatedOdds, _b, deduplicatedOdds_1, game, filename, error_2;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0:
+                                    console.log("\n=== Testing ".concat(league.name, " ==="));
+                                    leagueInfo = sports.find(function (sport) { return sport.key === league.key; });
+                                    if (!leagueInfo) {
+                                        console.log("".concat(league.name, " not found in available sports"));
+                                        return [2 /*return*/, "continue"];
+                                    }
+                                    console.log("".concat(league.name, " info:"), leagueInfo);
+                                    // Get odds for this league
+                                    console.log("\nFetching ".concat(league.name, " odds for selected bookmakers..."));
+                                    _c.label = 1;
+                                case 1:
+                                    _c.trys.push([1, 7, , 8]);
+                                    return [4 /*yield*/, client.getLeagueOdds(league.key)];
+                                case 2:
+                                    odds = _c.sent();
+                                    if (odds.length === 0) {
+                                        console.log("No ".concat(league.name, " games found with odds"));
+                                        return [2 /*return*/, "continue"];
+                                    }
+                                    deduplicatedOdds = deduplicateGames(odds);
+                                    console.log("\nFound ".concat(deduplicatedOdds.length, " ").concat(league.name, " games with odds (after deduplication):"));
+                                    _b = 0, deduplicatedOdds_1 = deduplicatedOdds;
+                                    _c.label = 3;
+                                case 3:
+                                    if (!(_b < deduplicatedOdds_1.length)) return [3 /*break*/, 6];
+                                    game = deduplicatedOdds_1[_b];
+                                    console.log("\nSaving ".concat(game.home_team, " vs ").concat(game.away_team, " to database..."));
+                                    return [4 /*yield*/, oddsService.saveGame(game)];
+                                case 4:
+                                    _c.sent();
+                                    // Display the odds
+                                    console.log("\n".concat(game.home_team, " vs ").concat(game.away_team, " (").concat(new Date(game.commence_time).toLocaleString(), ")"));
+                                    game.bookmakers.forEach(function (bookmaker) {
+                                        console.log("  ".concat(bookmaker.title, " odds:"));
+                                        bookmaker.markets.forEach(function (market) {
+                                            if (market.key === 'h2h') {
+                                                market.outcomes.forEach(function (outcome) {
+                                                    console.log("    ".concat(outcome.name, ": ").concat(outcome.price));
+                                                });
+                                            }
+                                        });
+                                    });
+                                    _c.label = 5;
+                                case 5:
+                                    _b++;
+                                    return [3 /*break*/, 3];
+                                case 6:
+                                    filename = "".concat(league.name.toLowerCase().replace(/\s+/g, '_'), "_odds.json");
+                                    fs.writeFileSync(filename, JSON.stringify(deduplicatedOdds, null, 2));
+                                    console.log("\nSaved deduplicated odds data to ".concat(filename));
+                                    return [3 /*break*/, 8];
+                                case 7:
+                                    error_2 = _c.sent();
+                                    console.error("Error fetching ".concat(league.name, " odds:"), error_2);
+                                    return [3 /*break*/, 8];
+                                case 8: return [2 /*return*/];
+                            }
+                        });
+                    };
+                    _i = 0, leagues_1 = leagues;
+                    _a.label = 3;
+                case 3:
+                    if (!(_i < leagues_1.length)) return [3 /*break*/, 6];
+                    league = leagues_1[_i];
+                    return [5 /*yield**/, _loop_1(league)];
+                case 4:
+                    _a.sent();
+                    _a.label = 5;
+                case 5:
+                    _i++;
+                    return [3 /*break*/, 3];
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    error_1 = _a.sent();
+                    console.error('Error:', error_1);
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
-            //Save the deduplicated data to a JSON file as backup
-            fs.writeFileSync('premier_league_odds.json', JSON.stringify(deduplicatedOdds, null, 2));
-            console.log('\nSaved deduplicated odds data to premier_league_odds.json');
-            // // Example: Query odds for a specific team - *******look at later
-            // const teamName = 'Liverpool';
-            // console.log(`\nQuerying odds for ${teamName}...`);
-            // const liverpoolOdds = await oddsService.getTeamOdds(teamName);
-            // console.log(`Found ${liverpoolOdds.length} odds entries for ${teamName}`);
-        }
-        catch (error) {
-            console.error('Error:', error);
-        }
+        });
     });
 }
 main();

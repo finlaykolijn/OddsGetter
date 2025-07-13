@@ -45,50 +45,70 @@ async function main() {
     console.log('Fetching available sports...');
     const sports = await client.getSports();
     
-    //Get Premier League in the sports list, key is soccer_epl
-    const premierLeague = sports.find(sport => sport.key === 'soccer_epl');
-    console.log('Premier League info:', premierLeague);
+    // Define leagues to test
+    const leagues = [
+      { name: 'Premier League', key: 'soccer_epl' },
+      { name: 'La Liga', key: 'soccer_spain_la_liga' },
+      { name: 'Bundesliga', key: 'soccer_germany_bundesliga' },
+    ];
     
-    //Get Premier League odds
-    console.log('\nFetching Premier League odds for selected bookmakers...');
-    const plOdds = await client.getPremierLeagueOdds();
-    
-    // Deduplicate games by team names
-    const deduplicatedOdds = deduplicateGames(plOdds);
-    
-    //Display the odds for FanDuel and DraftKings (Could add whichever bookmaker I want in oddsApi.ts)
-    console.log(`\nFound ${deduplicatedOdds.length} Premier League games with odds (after deduplication):`);
-    
-    // Save each game to the database
-    for (const game of deduplicatedOdds) {
-      console.log(`\nSaving ${game.home_team} vs ${game.away_team} to database...`);
-      await oddsService.saveGame(game);
+    for (const league of leagues) {
+      console.log(`\n=== Testing ${league.name} ===`);
       
-      // Display the odds
-      console.log(`\n${game.home_team} vs ${game.away_team} (${new Date(game.commence_time).toLocaleString()})`);
+      // Check if league exists in available sports
+      const leagueInfo = sports.find(sport => sport.key === league.key);
+      if (!leagueInfo) {
+        console.log(`${league.name} not found in available sports`);
+        continue;
+      }
       
-      game.bookmakers.forEach((bookmaker: any) => {
-        console.log(`  ${bookmaker.title} odds:`);
+      console.log(`${league.name} info:`, leagueInfo);
+      
+      // Get odds for this league
+      console.log(`\nFetching ${league.name} odds for selected bookmakers...`);
+      try {
+        const odds = await client.getLeagueOdds(league.key);
         
-        bookmaker.markets.forEach((market: any) => {
-          if (market.key === 'h2h') { // Can edit this to get other markets
-            market.outcomes.forEach((outcome: any) => {
-              console.log(`    ${outcome.name}: ${outcome.price}`);
+        if (odds.length === 0) {
+          console.log(`No ${league.name} games found with odds`);
+          continue;
+        }
+        
+        // Deduplicate games by team names
+        const deduplicatedOdds = deduplicateGames(odds);
+        
+        console.log(`\nFound ${deduplicatedOdds.length} ${league.name} games with odds (after deduplication):`);
+        
+        // Save each game to the database
+        for (const game of deduplicatedOdds) {
+          console.log(`\nSaving ${game.home_team} vs ${game.away_team} to database...`);
+          await oddsService.saveGame(game);
+          
+          // Display the odds
+          console.log(`\n${game.home_team} vs ${game.away_team} (${new Date(game.commence_time).toLocaleString()})`);
+          
+          game.bookmakers.forEach((bookmaker: any) => {
+            console.log(`  ${bookmaker.title} odds:`);
+            
+            bookmaker.markets.forEach((market: any) => {
+              if (market.key === 'h2h') {
+                market.outcomes.forEach((outcome: any) => {
+                  console.log(`    ${outcome.name}: ${outcome.price}`);
+                });
+              }
             });
-          }
-        });
-      });
+          });
+        }
+        
+        //Save the deduplicated data to a JSON file as backup
+        const filename = `${league.name.toLowerCase().replace(/\s+/g, '_')}_odds.json`;
+        fs.writeFileSync(filename, JSON.stringify(deduplicatedOdds, null, 2));
+        console.log(`\nSaved deduplicated odds data to ${filename}`);
+        
+      } catch (error) {
+        console.error(`Error fetching ${league.name} odds:`, error);
+      }
     }
-    
-    //Save the deduplicated data to a JSON file as backup
-    fs.writeFileSync('premier_league_odds.json', JSON.stringify(deduplicatedOdds, null, 2));
-    console.log('\nSaved deduplicated odds data to premier_league_odds.json');
-    
-    // // Example: Query odds for a specific team - *******look at later
-    // const teamName = 'Liverpool';
-    // console.log(`\nQuerying odds for ${teamName}...`);
-    // const liverpoolOdds = await oddsService.getTeamOdds(teamName);
-    // console.log(`Found ${liverpoolOdds.length} odds entries for ${teamName}`);
     
   } catch (error) {
     console.error('Error:', error);

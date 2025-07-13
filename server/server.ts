@@ -63,21 +63,28 @@ app.get('/api/seasons', async (req, res) => {
 
 app.get('/api/teams', async (req, res) => {
   try {
-    const { season = '2025-26' } = req.query;
+    const { season = '2025-26', league = 'soccer_epl' } = req.query;
+    console.log(`API /api/teams called with: season=${season}, league=${league}`);
+    
     const range = SEASON_DATE_RANGES[season as string];
     if (!range) {
       return res.status(400).json({ error: 'Invalid season' });
     }
-    // Find all teams that played a game in the season's date range
+    
+    console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
+    
+    // Find all teams that played a game in the season's date range and league
     const result = await pool.query(
       `SELECT DISTINCT team FROM (
-        SELECT home_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2
+        SELECT home_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
         UNION
-        SELECT away_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2
+        SELECT away_team as team FROM games WHERE commence_time >= $1 AND commence_time <= $2 AND sport_key = $3
       ) t
-      ORDER BY team`
-      , [range.start, range.end]
+      ORDER BY team`,
+      [range.start, range.end, league as string]
     );
+    
+    console.log(`Teams query returned ${result.rows.length} teams`);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching teams:', error);
@@ -87,11 +94,14 @@ app.get('/api/teams', async (req, res) => {
 
 app.get('/api/matches', async (req, res) => {
   try {
-    const { homeTeam, awayTeam, season = '2025-26' } = req.query;
+    const { homeTeam, awayTeam, season = '2025-26', league = 'soccer_epl' } = req.query;
+    console.log(`API /api/matches called with: season=${season}, league=${league}, homeTeam=${homeTeam}, awayTeam=${awayTeam}`);
+    
     const range = SEASON_DATE_RANGES[season as string];
     if (!range) {
       return res.status(400).json({ error: 'Invalid season' });
     }
+    
     let query = `
       SELECT 
         g.home_team,
@@ -105,9 +115,12 @@ app.get('/api/matches', async (req, res) => {
       FROM games g
       JOIN match_odds mo ON g.id = mo.game_id
       JOIN bookmakers b ON mo.bookmaker_id = b.id
-      WHERE g.commence_time >= $1 AND g.commence_time <= $2
+      WHERE g.commence_time >= $1 AND g.commence_time <= $2 AND g.sport_key = $3
     `;
-    const params: string[] = [range.start, range.end];
+    const params: string[] = [range.start, range.end, league as string];
+    
+    console.log(`Query params: start=${range.start}, end=${range.end}, league=${league}`);
+    
     if (homeTeam) {
       params.push(homeTeam as string);
       query += ` AND g.home_team = $${params.length}`;
@@ -117,7 +130,13 @@ app.get('/api/matches', async (req, res) => {
       query += ` AND g.away_team = $${params.length}`;
     }
     query += ` ORDER BY g.commence_time ASC, mo.last_updated DESC`;
+    
+    console.log(`Final query: ${query}`);
+    console.log(`Final params: ${JSON.stringify(params)}`);
+    
     const result = await pool.query(query, params);
+    console.log(`Query returned ${result.rows.length} rows`);
+    
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching matches:', error);
@@ -157,19 +176,29 @@ app.post('/api/admin/update-odds', async (req, res) => {
     const client = new OddsApiClient(apiKey);
     const oddsService = new OddsService();
 
-    console.log('Fetching Premier League odds...');
-    const plOdds = await client.getPremierLeagueOdds();
-    
-    let savedCount = 0;
-    for (const game of plOdds) {
-      await oddsService.saveGame(game);
-      savedCount++;
+    // Define supported leagues
+    const leagues = [
+      { name: 'Premier League', key: 'soccer_epl' },
+      { name: 'La Liga', key: 'soccer_spain_la_liga' },
+      { name: 'Bundesliga', key: 'soccer_germany_bundesliga' },
+    ];
+
+    let summary: Record<string, number> = {};
+    for (const league of leagues) {
+      console.log(`Fetching odds for ${league.name}...`);
+      const odds = await client.getLeagueOdds(league.key);
+      let savedCount = 0;
+      for (const game of odds) {
+        await oddsService.saveGame(game);
+        savedCount++;
+      }
+      summary[league.name] = savedCount;
     }
 
     res.json({ 
       success: true, 
-      message: `Successfully updated odds for ${savedCount} games`,
-      data: { gamesProcessed: savedCount }
+      message: `Successfully updated odds for all leagues`,
+      data: { gamesProcessed: summary }
     });
   } catch (error) {
     console.error('Error updating odds:', error);

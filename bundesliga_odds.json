@@ -1,0 +1,317 @@
+[
+  {
+    "id": "b7595997eb85dcbc3a4e4eb020f315dd",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-22T18:30:00Z",
+    "home_team": "Bayern Munich",
+    "away_team": "RB Leipzig",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Bayern Munich",
+                "price": 1.28
+              },
+              {
+                "name": "RB Leipzig",
+                "price": 7
+              },
+              {
+                "name": "Draw",
+                "price": 5.5
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2b9ab502221f28a483bd6e15c912aa8a",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "1. FC Heidenheim",
+    "away_team": "VfL Wolfsburg",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "1. FC Heidenheim",
+                "price": 2.7
+              },
+              {
+                "name": "VfL Wolfsburg",
+                "price": 2.3
+              },
+              {
+                "name": "Draw",
+                "price": 3.25
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5b2fff8ea253f0c94af5756895b7f149",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "FSV Mainz 05",
+    "away_team": "1. FC Köln",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "1. FC Köln",
+                "price": 3.8
+              },
+              {
+                "name": "FSV Mainz 05",
+                "price": 1.83
+              },
+              {
+                "name": "Draw",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "45c1a5890b03f21bc137340dabc4a7d3",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "SC Freiburg",
+    "away_team": "Augsburg",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Augsburg",
+                "price": 4.2
+              },
+              {
+                "name": "SC Freiburg",
+                "price": 1.71
+              },
+              {
+                "name": "Draw",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4b5bf052ddefb56d61c95922406bfa13",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "TSG Hoffenheim",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Bayer Leverkusen",
+                "price": 1.4
+              },
+              {
+                "name": "TSG Hoffenheim",
+                "price": 5.75
+              },
+              {
+                "name": "Draw",
+                "price": 4.7
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "8a9a476c07fc5ec49a8aaf314e9dd632",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "FC St. Pauli",
+    "away_team": "Borussia Dortmund",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Borussia Dortmund",
+                "price": 1.67
+              },
+              {
+                "name": "FC St. Pauli",
+                "price": 4.2
+              },
+              {
+                "name": "Draw",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "65d056ea3a51f7e6e81d67d53087f003",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "Borussia Monchengladbach",
+    "away_team": "Hamburger SV",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Borussia Monchengladbach",
+                "price": 2
+              },
+              {
+                "name": "Hamburger SV",
+                "price": 3.1
+              },
+              {
+                "name": "Draw",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "a81fc1a653444c18ddbfa894d842571c",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "Eintracht Frankfurt",
+    "away_team": "Werder Bremen",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Eintracht Frankfurt",
+                "price": 1.83
+              },
+              {
+                "name": "Werder Bremen",
+                "price": 3.55
+              },
+              {
+                "name": "Draw",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d17accb4fb59e0c9b4af9a7328e3b265",
+    "sport_key": "soccer_germany_bundesliga",
+    "sport_title": "Bundesliga - Germany",
+    "commence_time": "2025-08-23T13:30:00Z",
+    "home_team": "Union Berlin",
+    "away_team": "VfB Stuttgart",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-12T21:27:50Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-12T21:27:50Z",
+            "outcomes": [
+              {
+                "name": "Union Berlin",
+                "price": 3.1
+              },
+              {
+                "name": "VfB Stuttgart",
+                "price": 2
+              },
+              {
+                "name": "Draw",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

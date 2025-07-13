@@ -42,7 +42,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const oddsApi_1 = require("./oddsApi");
+const oddsApi_1 = require("../../server/oddsApi");
 const fs = __importStar(require("fs"));
 const dotenv = __importStar(require("dotenv"));
 // Load environment variables from .env file

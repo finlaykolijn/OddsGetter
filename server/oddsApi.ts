@@ -103,13 +103,20 @@ export class OddsApiClient {
     }
   }
 
-//Get Premier League odds specifically for FanDuel and DraftKings
-  async getPremierLeagueOdds(): Promise<Game[]> {
-    return this.getOdds('soccer_epl', {
+  /**
+   * Get odds for a specific league by its sport key
+   */
+  async getLeagueOdds(leagueKey: string): Promise<Game[]> {
+    return this.getOdds(leagueKey, {
       regions: 'us',
-      markets: 'h2h', // ML odds, can edit this to get other markets
-      bookmakers: 'fanduel,draftkings'
+      markets: 'h2h',
+      bookmakers: 'fanduel,draftkings', // Can edit this to get other bookmakers
     });
+  }
+
+  // Deprecated: Use getLeagueOdds instead
+  async getPremierLeagueOdds(): Promise<Game[]> {
+    return this.getLeagueOdds('soccer_epl');
   }
 
   private handleApiError(error: any): void {

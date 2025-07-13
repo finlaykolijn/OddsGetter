@@ -4,6 +4,7 @@ import OddsDisplay from './OddsDisplay';
 import TeamSelector from './TeamSelector';
 import SeasonSelector, { Season } from './SeasonSelector';
 import AdminPanel from './AdminPanel';
+import LeagueSelector, { League } from './LeagueSelector';
 import { Match, Team } from '../types';
 
 type View = 'home' | 'teams' | 'matches' | 'odds' | 'admin';
@@ -50,9 +51,21 @@ function App() {
   const [seasons, setSeasons] = useState<Season[]>([]);
   const [selectedSeason, setSelectedSeason] = useState<string>('2025-26');
 
+  const leagueOptions: League[] = [
+    { key: 'soccer_epl', name: 'Premier League' },
+    { key: 'soccer_spain_la_liga', name: 'La Liga' },
+    { key: 'soccer_germany_bundesliga', name: 'Bundesliga' },
+  ];
+  const [selectedLeague, setSelectedLeague] = useState<string>('soccer_epl');
+
   const handleSeasonChange = (seasonId: string) => {
     console.log(`Season changed from ${selectedSeason} to ${seasonId}`);
     setSelectedSeason(seasonId);
+  };
+
+  const handleLeagueChange = (leagueKey: string) => {
+    console.log(`League changed from ${selectedLeague} to ${leagueKey}`);
+    setSelectedLeague(leagueKey);
   };
 
   useEffect(() => {
@@ -64,7 +77,15 @@ function App() {
       fetchTeams();
       fetchAllMatches();
     }
-  }, [selectedSeason, seasons.length]);
+  }, [selectedSeason, selectedLeague, seasons.length]);
+
+  useEffect(() => {
+    // When league changes, reset selected teams and matches
+    setSelectedHomeTeam('');
+    setSelectedAwayTeam('');
+    setMatches([]);
+    setError('');
+  }, [selectedLeague]);
 
   const fetchSeasons = async () => {
     try {
@@ -84,13 +105,13 @@ function App() {
 
   const fetchTeams = async () => {
     try {
-      console.log(`Fetching teams for season: ${selectedSeason}`);
-      const response = await fetch(`/api/teams?season=${selectedSeason}`);
+      console.log(`Fetching teams for season: ${selectedSeason}, league: ${selectedLeague}`);
+      const response = await fetch(`/api/teams?season=${selectedSeason}&league=${selectedLeague}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(`Teams data for ${selectedSeason}:`, data);
+      console.log(`Teams data for ${selectedSeason}, ${selectedLeague}:`, data);
       setTeams(data);
     } catch (err) {
       console.error('Error fetching teams:', err);
@@ -100,13 +121,13 @@ function App() {
 
   const fetchAllMatches = async () => {
     try {
-      console.log(`Fetching all matches for season: ${selectedSeason}`);
-      const response = await fetch(`/api/matches?season=${selectedSeason}`);
+      console.log(`Fetching all matches for season: ${selectedSeason}, league: ${selectedLeague}`);
+      const response = await fetch(`/api/matches?season=${selectedSeason}&league=${selectedLeague}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(`All matches data for ${selectedSeason}:`, data);
+      console.log(`All matches data for ${selectedSeason}, ${selectedLeague}:`, data);
       setAllMatches(data);
     } catch (err) {
       console.error('Error fetching matches:', err);
@@ -128,6 +149,7 @@ function App() {
       if (selectedHomeTeam) params.append('homeTeam', selectedHomeTeam);
       if (selectedAwayTeam) params.append('awayTeam', selectedAwayTeam);
       params.append('season', selectedSeason);
+      params.append('league', selectedLeague);
 
       console.log('Fetching matches with params:', params.toString());
       const response = await fetch(`/api/matches?${params}`);
@@ -280,7 +302,7 @@ function App() {
 
   const renderTeamsView = () => (
     <div className="teams-view">
-      <h2>Premier League Teams</h2>
+      <h2>{leagueOptions.find(l => l.key === selectedLeague)?.name || 'Premier League'} Teams</h2>
       <div className="teams-grid">
         {teams.map((team, index) => (
           <div key={index} className="team-card">
@@ -299,7 +321,7 @@ function App() {
 
   const renderMatchesView = () => (
     <div className="matches-view">
-      <h2>All Available Matches</h2>
+      <h2>All Available {leagueOptions.find(l => l.key === selectedLeague)?.name || 'Premier League'} Matches</h2>
       {error && (
         <div className="error-message">
           {error}
@@ -319,7 +341,7 @@ function App() {
 
   const renderOddsView = () => (
     <div className="odds-view">
-      <h2>Search for Specific Odds</h2>
+      <h2>Search for Specific {leagueOptions.find(l => l.key === selectedLeague)?.name || 'Premier League'} Odds</h2>
       <div className="controls">
         <TeamSelector
           teams={teams}
@@ -373,9 +395,14 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>⚽ OddsGetter</h1>
-        <p>Premier League Odds Tracker</p>
+        <p>{leagueOptions.find(l => l.key === selectedLeague)?.name || 'Premier League'} Odds Tracker</p>
         
         <div className="header-controls">
+          <LeagueSelector
+            leagues={leagueOptions}
+            selectedLeague={selectedLeague}
+            onLeagueChange={handleLeagueChange}
+          />
           <SeasonSelector
             seasons={seasons}
             selectedSeason={selectedSeason}
