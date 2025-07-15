@@ -36,9 +36,9 @@ async function checkBookmakers() {
       { name: 'UEFA Europa League', possibleKeys: ['soccer_uefa_europa_league', 'soccer_europa_league'] },
       { name: 'Bundesliga', possibleKeys: ['soccer_germany_bundesliga', 'soccer_bundesliga'] },
       { name: 'La Liga', possibleKeys: ['soccer_spain_la_liga', 'soccer_la_liga'] },
+      { name: 'Serie A', possibleKeys: ['soccer_italy_serie_a', 'soccer_serie_a'] },
+      { name: 'Ligue 1', possibleKeys: ['soccer_france_ligue_one', 'soccer_ligue_1'] },
       //{ name: 'UEFA Europa Conference League', possibleKeys: ['soccer_uefa_europa_conf_league', 'soccer_europa_conf_league'] },
-      //{ name: 'Serie A', possibleKeys: ['soccer_italy_serie_a', 'soccer_serie_a'] },
-      //{ name: 'Ligue 1', possibleKeys: ['soccer_france_ligue_1', 'soccer_ligue_1'] },
       //{ name: 'Eredivisie', possibleKeys: ['soccer_netherlands_eredivisie', 'soccer_eredivisie'] },
       //{ name: 'MLS', possibleKeys: ['soccer_usa_mls', 'soccer_mls'] }
     ];

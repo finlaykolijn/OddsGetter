@@ -181,6 +181,9 @@ app.post('/api/admin/update-odds', async (req, res) => {
       { name: 'Premier League', key: 'soccer_epl' },
       { name: 'La Liga', key: 'soccer_spain_la_liga' },
       { name: 'Bundesliga', key: 'soccer_germany_bundesliga' },
+      { name: 'Serie A', key: 'soccer_italy_serie_a' },
+      { name: 'Ligue 1', key: 'soccer_france_ligue_one' },
+      { name: 'Champions League', key: 'soccer_uefa_champs_league' },
     ];
 
     let summary: Record<string, number> = {};

@@ -157,16 +157,25 @@ var OddsService = /** @class */ (function () {
             });
         });
     };
-    OddsService.prototype.getUpcomingPremierLeagueMatches = function () {
+    OddsService.prototype.getUpcomingMatches = function (leagueKey) {
+        if (leagueKey === void 0) { leagueKey = 'soccer_epl'; }
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, config_1.default.query("SELECT \n                g.home_team,\n                g.away_team,\n                g.commence_time,\n                b.title as bookmaker,\n                mo.home_win_odds,\n                mo.draw_odds,\n                mo.away_win_odds,\n                mo.last_updated\n            FROM games g\n            JOIN match_odds mo ON g.id = mo.game_id\n            JOIN bookmakers b ON mo.bookmaker_id = b.id\n            WHERE g.sport_key = 'soccer_epl'\n                AND g.commence_time > CURRENT_TIMESTAMP\n            ORDER BY g.commence_time ASC, b.title")];
+                    case 0: return [4 /*yield*/, config_1.default.query("SELECT \n                g.home_team,\n                g.away_team,\n                g.commence_time,\n                b.title as bookmaker,\n                mo.home_win_odds,\n                mo.draw_odds,\n                mo.away_win_odds,\n                mo.last_updated\n            FROM games g\n            JOIN match_odds mo ON g.id = mo.game_id\n            JOIN bookmakers b ON mo.bookmaker_id = b.id\n            WHERE g.sport_key = $1\n                AND g.commence_time > CURRENT_TIMESTAMP\n            ORDER BY g.commence_time ASC, b.title", [leagueKey])];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result.rows];
                 }
+            });
+        });
+    };
+    // Backward compatibility method
+    OddsService.prototype.getUpcomingPremierLeagueMatches = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.getUpcomingMatches('soccer_epl')];
             });
         });
     };

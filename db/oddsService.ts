@@ -145,7 +145,7 @@ export class OddsService {
         return result.rows;
     }
 
-    async getUpcomingPremierLeagueMatches() {
+    async getUpcomingMatches(leagueKey: string = 'soccer_epl') {
         const result = await pool.query(
             `SELECT 
                 g.home_team,
@@ -159,10 +159,16 @@ export class OddsService {
             FROM games g
             JOIN match_odds mo ON g.id = mo.game_id
             JOIN bookmakers b ON mo.bookmaker_id = b.id
-            WHERE g.sport_key = 'soccer_epl'
+            WHERE g.sport_key = $1
                 AND g.commence_time > CURRENT_TIMESTAMP
-            ORDER BY g.commence_time ASC, b.title`
+            ORDER BY g.commence_time ASC, b.title`,
+            [leagueKey]
         );
         return result.rows;
+    }
+
+    // Backward compatibility method
+    async getUpcomingPremierLeagueMatches() {
+        return this.getUpcomingMatches('soccer_epl');
     }
 } 
