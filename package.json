@@ -26,7 +26,7 @@
   },
   "scripts": {
     "scrape": "tsc -p tsconfig.server.json && node scripts/scraper/scraper.js",
-    "odds": "tsc -p tsconfig.server.json && node server/oddsDemo.js",
+    "odds": "tsc -p tsconfig.server.json && node server/pullOdds.js",
     "check-bookmakers": "tsc -p tsconfig.server.json && node scripts/checks/checkBookmakers.js",
     "check-usage": "tsc -p tsconfig.server.json && node scripts/checks/checkApiUsage.js",
     "dev": "vite",

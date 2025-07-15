@@ -10,11 +10,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Girona",
@@ -35,11 +35,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Girona",
@@ -60,11 +60,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Girona",
@@ -95,19 +95,19 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Oviedo",
-                "price": 8.5
+                "price": 9
               },
               {
                 "name": "Villarreal",
-                "price": 1.32
+                "price": 1.31
               },
               {
                 "name": "Draw",
@@ -120,11 +120,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Oviedo",
@@ -132,7 +132,7 @@
               },
               {
                 "name": "Villarreal",
-                "price": 1.32
+                "price": 1.33
               },
               {
                 "name": "Draw",
@@ -155,11 +155,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Alavés",
@@ -180,11 +180,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Alavés",
@@ -192,7 +192,7 @@
               },
               {
                 "name": "Levante",
-                "price": 3.95
+                "price": 3.8
               },
               {
                 "name": "Draw",
@@ -215,11 +215,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Barcelona",
@@ -240,15 +240,15 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Barcelona",
-                "price": 1.51
+                "price": 1.5
               },
               {
                 "name": "Mallorca",
@@ -256,67 +256,7 @@
               },
               {
                 "name": "Draw",
-                "price": 4
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "f3d481ed9bd49829718585f6b372cf67",
-    "sport_key": "soccer_spain_la_liga",
-    "sport_title": "La Liga - Spain",
-    "commence_time": "2025-08-16T19:30:00Z",
-    "home_team": "Valencia",
-    "away_team": "Real Sociedad",
-    "bookmakers": [
-      {
-        "key": "draftkings",
-        "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
-        "markets": [
-          {
-            "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
-            "outcomes": [
-              {
-                "name": "Real Sociedad",
-                "price": 2.8
-              },
-              {
-                "name": "Valencia",
-                "price": 2.65
-              },
-              {
-                "name": "Draw",
-                "price": 2.75
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "key": "fanduel",
-        "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
-        "markets": [
-          {
-            "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
-            "outcomes": [
-              {
-                "name": "Real Sociedad",
-                "price": 2.85
-              },
-              {
-                "name": "Valencia",
-                "price": 2.75
-              },
-              {
-                "name": "Draw",
-                "price": 2.85
+                "price": 4.1
               }
             ]
           }
@@ -335,11 +275,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Celta Vigo",
@@ -360,23 +300,23 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Celta Vigo",
-                "price": 1.71
+                "price": 1.77
               },
               {
                 "name": "Getafe",
-                "price": 5.1
+                "price": 4.8
               },
               {
                 "name": "Draw",
-                "price": 3.4
+                "price": 3.3
               }
             ]
           }
@@ -395,19 +335,19 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Athletic Bilbao",
-                "price": 1.61
+                "price": 1.62
               },
               {
                 "name": "Sevilla",
-                "price": 5
+                "price": 4.9
               },
               {
                 "name": "Draw",
@@ -420,11 +360,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Athletic Bilbao",
@@ -432,11 +372,71 @@
               },
               {
                 "name": "Sevilla",
-                "price": 5.3
+                "price": 5.5
+              },
+              {
+                "name": "Draw",
+                "price": 3.5
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "0595f56cfe72699dc094ca05733d7b92",
+    "sport_key": "soccer_spain_la_liga",
+    "sport_title": "La Liga - Spain",
+    "commence_time": "2025-08-17T19:00:00Z",
+    "home_team": "Espanyol",
+    "away_team": "Atlético Madrid",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-15T23:11:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:11:44Z",
+            "outcomes": [
+              {
+                "name": "Atlético Madrid",
+                "price": 1.57
+              },
+              {
+                "name": "Espanyol",
+                "price": 5.25
               },
               {
                 "name": "Draw",
                 "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:38Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:38Z",
+            "outcomes": [
+              {
+                "name": "Atlético Madrid",
+                "price": 1.53
+              },
+              {
+                "name": "Espanyol",
+                "price": 6
+              },
+              {
+                "name": "Draw",
+                "price": 3.7
               }
             ]
           }
@@ -453,13 +453,38 @@
     "away_team": "CA Osasuna",
     "bookmakers": [
       {
-        "key": "fanduel",
-        "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:11:44Z",
+            "outcomes": [
+              {
+                "name": "CA Osasuna",
+                "price": 10
+              },
+              {
+                "name": "Real Madrid",
+                "price": 1.22
+              },
+              {
+                "name": "Draw",
+                "price": 5.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:38Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "CA Osasuna",
@@ -490,11 +515,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
                 "name": "Elche CF",
@@ -515,11 +540,11 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
                 "name": "Elche CF",
@@ -540,33 +565,33 @@
     ]
   },
   {
-    "id": "0595f56cfe72699dc094ca05733d7b92",
+    "id": "f3d481ed9bd49829718585f6b372cf67",
     "sport_key": "soccer_spain_la_liga",
     "sport_title": "La Liga - Spain",
-    "commence_time": "2025-08-17T19:30:00Z",
-    "home_team": "Espanyol",
-    "away_team": "Atlético Madrid",
+    "commence_time": "2025-08-17T19:00:00Z",
+    "home_team": "Valencia",
+    "away_team": "Real Sociedad",
     "bookmakers": [
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:28:50Z",
+        "last_update": "2025-07-15T23:11:44Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:28:50Z",
+            "last_update": "2025-07-15T23:11:44Z",
             "outcomes": [
               {
-                "name": "Atlético Madrid",
-                "price": 1.57
+                "name": "Real Sociedad",
+                "price": 2.8
               },
               {
-                "name": "Espanyol",
-                "price": 5.25
+                "name": "Valencia",
+                "price": 2.6
               },
               {
                 "name": "Draw",
-                "price": 3.6
+                "price": 2.75
               }
             ]
           }
@@ -575,23 +600,23 @@
       {
         "key": "fanduel",
         "title": "FanDuel",
-        "last_update": "2025-07-12T21:26:18Z",
+        "last_update": "2025-07-15T23:10:38Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:26:18Z",
+            "last_update": "2025-07-15T23:10:38Z",
             "outcomes": [
               {
-                "name": "Atlético Madrid",
-                "price": 1.53
+                "name": "Real Sociedad",
+                "price": 2.85
               },
               {
-                "name": "Espanyol",
-                "price": 6
+                "name": "Valencia",
+                "price": 2.75
               },
               {
                 "name": "Draw",
-                "price": 3.7
+                "price": 2.85
               }
             ]
           }

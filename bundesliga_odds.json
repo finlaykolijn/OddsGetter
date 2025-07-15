@@ -10,11 +10,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Bayern Munich",
@@ -27,6 +27,31 @@
               {
                 "name": "Draw",
                 "price": 5.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Bayern Munich",
+                "price": 1.24
+              },
+              {
+                "name": "RB Leipzig",
+                "price": 8.5
+              },
+              {
+                "name": "Draw",
+                "price": 6
               }
             ]
           }
@@ -45,11 +70,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "1. FC Heidenheim",
@@ -57,11 +82,36 @@
               },
               {
                 "name": "VfL Wolfsburg",
-                "price": 2.3
+                "price": 2.35
               },
               {
                 "name": "Draw",
                 "price": 3.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "1. FC Heidenheim",
+                "price": 2.8
+              },
+              {
+                "name": "VfL Wolfsburg",
+                "price": 2.4
+              },
+              {
+                "name": "Draw",
+                "price": 3.4
               }
             ]
           }
@@ -80,19 +130,19 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "1. FC Köln",
-                "price": 3.8
+                "price": 3.75
               },
               {
                 "name": "FSV Mainz 05",
-                "price": 1.83
+                "price": 1.8
               },
               {
                 "name": "Draw",
@@ -115,15 +165,40 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Augsburg",
                 "price": 4.2
+              },
+              {
+                "name": "SC Freiburg",
+                "price": 1.71
+              },
+              {
+                "name": "Draw",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Augsburg",
+                "price": 4.5
               },
               {
                 "name": "SC Freiburg",
@@ -150,23 +225,48 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Bayer Leverkusen",
-                "price": 1.4
+                "price": 1.41
               },
               {
                 "name": "TSG Hoffenheim",
-                "price": 5.75
+                "price": 5.5
               },
               {
                 "name": "Draw",
                 "price": 4.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Bayer Leverkusen",
+                "price": 1.38
+              },
+              {
+                "name": "TSG Hoffenheim",
+                "price": 6.5
+              },
+              {
+                "name": "Draw",
+                "price": 4.8
               }
             ]
           }
@@ -185,15 +285,15 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Borussia Dortmund",
-                "price": 1.67
+                "price": 1.69
               },
               {
                 "name": "FC St. Pauli",
@@ -201,7 +301,32 @@
               },
               {
                 "name": "Draw",
-                "price": 3.8
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Borussia Dortmund",
+                "price": 1.69
+              },
+              {
+                "name": "FC St. Pauli",
+                "price": 4.5
+              },
+              {
+                "name": "Draw",
+                "price": 3.9
               }
             ]
           }
@@ -220,11 +345,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Borussia Monchengladbach",
@@ -237,6 +362,31 @@
               {
                 "name": "Draw",
                 "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Borussia Monchengladbach",
+                "price": 2
+              },
+              {
+                "name": "Hamburger SV",
+                "price": 3.4
+              },
+              {
+                "name": "Draw",
+                "price": 3.7
               }
             ]
           }
@@ -255,23 +405,48 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Eintracht Frankfurt",
-                "price": 1.83
+                "price": 1.77
               },
               {
                 "name": "Werder Bremen",
-                "price": 3.55
+                "price": 3.65
               },
               {
                 "name": "Draw",
                 "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Eintracht Frankfurt",
+                "price": 1.77
+              },
+              {
+                "name": "Werder Bremen",
+                "price": 4
+              },
+              {
+                "name": "Draw",
+                "price": 3.8
               }
             ]
           }
@@ -290,11 +465,11 @@
       {
         "key": "draftkings",
         "title": "DraftKings",
-        "last_update": "2025-07-12T21:27:50Z",
+        "last_update": "2025-07-15T23:11:39Z",
         "markets": [
           {
             "key": "h2h",
-            "last_update": "2025-07-12T21:27:50Z",
+            "last_update": "2025-07-15T23:11:39Z",
             "outcomes": [
               {
                 "name": "Union Berlin",
@@ -302,11 +477,36 @@
               },
               {
                 "name": "VfB Stuttgart",
-                "price": 2
+                "price": 2.05
               },
               {
                 "name": "Draw",
                 "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2025-07-15T23:10:06Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2025-07-15T23:10:06Z",
+            "outcomes": [
+              {
+                "name": "Union Berlin",
+                "price": 3.2
+              },
+              {
+                "name": "VfB Stuttgart",
+                "price": 2.1
+              },
+              {
+                "name": "Draw",
+                "price": 3.5
               }
             ]
           }
